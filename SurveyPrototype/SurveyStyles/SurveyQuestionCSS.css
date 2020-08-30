@@ -1,0 +1,87 @@
+﻿/*  
+ *  Project: AITResearch
+ *  
+ *  Developed by: Goran Ilievski
+ *  ID: #7108
+ *  Date: 30/08/2020
+ *  
+ *  Subject: Data-Driven Apps
+ */
+
+/* All questions */
+body {
+    font-family: 'Roboto', 'Times New Roman';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    padding-top: 90px;
+    border: 3px double #5dbcd2;
+    min-height: 600px;
+}
+
+body h1 {
+    margin-top: 0px;
+    margin-right: 170px;
+    text-align: center;
+}
+
+header {
+    /*width: 500px;*/
+    margin: 10px;
+}
+
+header h1 {
+    padding-left: 30px;
+    margin-right: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 90px;
+}
+
+.center {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 120px;
+}
+
+.validator {
+    color: red;
+}
+
+.button {
+    font-family: 'Roboto', 'Times New Roman';
+    font-size: 20px;
+    background-color: #5dbcd2;
+    color: white;
+    width: 100px;
+}
+
+/* Radio questions */
+.radio-toolbar input[type="radio"] {
+    display: none;
+}
+
+.radio-toolbar label {
+    background-color: #ddd;
+    padding: 4px 11px;
+    font-size: 16px;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+    background-color: #5dbcd2;
+}
+
+/* Dropdown questions */
+
+
+/* Text questions */
+
+
+/* Checkbox questions */

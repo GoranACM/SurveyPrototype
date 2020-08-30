@@ -1,0 +1,62 @@
+﻿/*  
+ *  Project: AITResearch
+ *  
+ *  Developed by: Goran Ilievski
+ *  ID: #7108
+ *  Date: 30/08/2020
+ *  
+ *  Subject: Data-Driven Apps
+ */
+
+body {
+    font-family: 'Roboto', 'Times New Roman';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 3px double #5dbcd2;
+    padding-top: 90px;
+    min-height: 600px;
+}
+
+h1 {
+    margin-top: 0px;
+    margin-right: 170px;
+    text-align: center;
+}
+
+header {
+    margin: 10px;
+}
+
+header h1 {
+    padding-left: 145px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 90px;
+}
+
+.center {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 90px;
+}
+
+.validator {
+    color: red;
+}
+
+.button {
+    font-family: 'Roboto', 'Times New Roman';
+    font-size: 20px;
+    background-color: #5dbcd2;
+    color: white;
+    margin-left: 35px;
+    width: 100px;
+}

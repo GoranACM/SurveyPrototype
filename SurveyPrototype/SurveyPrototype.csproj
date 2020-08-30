@@ -68,10 +68,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SurveyImages\aitr.png" />
+    <Content Include="SurveyImages\arrow.png" />
+    <Content Include="SurveyImages\favicon.ico" />
+    <Content Include="SurveyPages\Survey.aspx" />
+    <Content Include="SurveyPages\SurveyHome.aspx" />
+    <Content Include="SurveyStyles\SurveyMainCSS.css" />
+    <Content Include="SurveyStyles\SurveyQuestionCSS.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SurveyDBUtilities\SQuestionDAO.cs" />
+    <Compile Include="SurveyDBUtilities\SurveyDBConnector.cs" />
     <Compile Include="SurveyEntities\AITRStaff.cs" />
     <Compile Include="SurveyEntities\SAnswer.cs" />
     <Compile Include="SurveyEntities\SAnswerOptions.cs" />
@@ -79,9 +87,26 @@
     <Compile Include="SurveyEntities\SQuestionOptions.cs" />
     <Compile Include="SurveyEntities\SRespondent.cs" />
     <Compile Include="SurveyEntities\SSession.cs" />
+    <Compile Include="SurveyPages\Survey.aspx.cs">
+      <DependentUpon>Survey.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SurveyPages\Survey.aspx.designer.cs">
+      <DependentUpon>Survey.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyPages\SurveyHome.aspx.cs">
+      <DependentUpon>SurveyHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SurveyPages\SurveyHome.aspx.designer.cs">
+      <DependentUpon>SurveyHome.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="SurveyFonts\Roboto-Bold.ttf" />
+    <Content Include="SurveyFonts\Roboto-Italic.ttf" />
+    <Content Include="SurveyFonts\Roboto-Regular.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -89,10 +114,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SurveyDBUtilities\" />
-    <Folder Include="SurveyPages\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
