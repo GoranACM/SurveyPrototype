@@ -23,5 +23,6 @@ namespace SurveyPrototype.SurveyEntities
         public int aID { get; set; }
         public int qID { get; set; }
         public int rID { get; set; }
+        public string aText { get; set; }
     }
 }

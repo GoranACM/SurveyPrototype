@@ -70,7 +70,8 @@
     <Content Include="SurveyImages\aitr.png" />
     <Content Include="SurveyImages\arrow.png" />
     <Content Include="SurveyImages\favicon.ico" />
-    <Content Include="SurveyPages\Survey.aspx" />
+    <Content Include="SurveyPages\RadioQuestionControl.ascx" />
+    <Content Include="Survey\Survey.aspx" />
     <Content Include="SurveyPages\SurveyHome.aspx" />
     <Content Include="SurveyStyles\SurveyMainCSS.css" />
     <Content Include="SurveyStyles\SurveyQuestionCSS.css" />
@@ -87,11 +88,18 @@
     <Compile Include="SurveyEntities\SQuestionOptions.cs" />
     <Compile Include="SurveyEntities\SRespondent.cs" />
     <Compile Include="SurveyEntities\SSession.cs" />
-    <Compile Include="SurveyPages\Survey.aspx.cs">
+    <Compile Include="SurveyPages\RadioQuestionControl.ascx.cs">
+      <DependentUpon>RadioQuestionControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SurveyPages\RadioQuestionControl.ascx.designer.cs">
+      <DependentUpon>RadioQuestionControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Survey\Survey.aspx.cs">
       <DependentUpon>Survey.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SurveyPages\Survey.aspx.designer.cs">
+    <Compile Include="Survey\Survey.aspx.designer.cs">
       <DependentUpon>Survey.aspx</DependentUpon>
     </Compile>
     <Compile Include="SurveyPages\SurveyHome.aspx.cs">

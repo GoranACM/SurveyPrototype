@@ -7,11 +7,15 @@ using System.Web.UI.WebControls;
 
 namespace SurveyPrototype.SurveyPages
 {
-    public partial class Survey : System.Web.UI.Page
+    public partial class RadioQuestionControl : System.Web.UI.UserControl
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+
+        public RadioButtonList QuestionRadioButtonList { get; set; }
+
     }
 }

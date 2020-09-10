@@ -22,5 +22,6 @@ namespace SurveyPrototype.SurveyEntities
     {
         public int sID { get; set; }
         public int rID { get; set; }
+        public bool sComplete { get; set; }
     }
 }
