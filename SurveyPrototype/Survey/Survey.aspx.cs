@@ -1,4 +1,14 @@
-﻿using SurveyPrototype.SurveyDBUtilities;
+﻿/*  
+ *  Project: AITResearch
+ *  
+ *  Developed by: Goran Ilievski
+ *  ID: #7108
+ *  Date: 30/08/2020
+ *  
+ *  Subject: Data-Driven Apps
+ */
+
+using SurveyPrototype.SurveyDBUtilities;
 using SurveyPrototype.SurveyEntities;
 using System;
 using System.Collections.Generic;
@@ -94,7 +104,7 @@ namespace SurveyPrototype.SurveyPages
             }
             catch (Exception)
             {
-
+                Response.Redirect("~/ErrorPages/ErrorPage.aspx");
                 throw;
             }
 
@@ -102,148 +112,158 @@ namespace SurveyPrototype.SurveyPages
 
         protected void nextBtn_Click(object sender, EventArgs e)
         {
-            int nextQuestionId = (int)Session["NextQID"];
-            Session["NextQID"] = nextQuestionId + 1;
-
-            SQuestion question = SQuestionDAO.GetQuestionById(nextQuestionId);
-
-            // Method to call each different type of question
-            if ("text".Equals(question.qType))
+            try
             {
-                TextBox textBox = (TextBox)QuestionPlaceholder.FindControl("RadioQuestion"); // Get the question from the placeholder
+                int nextQuestionId = (int)Session["NextQID"];
+                Session["NextQID"] = nextQuestionId + 1;
 
-                if (textBox != null)
+                SQuestion question = SQuestionDAO.GetQuestionById(nextQuestionId);
+
+                // Method to call each different type of question
+                if ("text".Equals(question.qType))
                 {
-                    SAnswer userAnswer = new SAnswer();
+                    TextBox textBox = (TextBox)QuestionPlaceholder.FindControl("RadioQuestion"); // Get the question from the placeholder
 
-                    userAnswer.aText = textBox.Text;
-                    userAnswer.aID = (int)Session["CurrentQuestionID"];
-                    userAnswer.qID = Int16.Parse(textBox.Attributes["questionId"]);
-
-                    // Storing answers in a Session
-                    if (Session["Answers"] != null)
+                    if (textBox != null)
                     {
-                        // Store each following Answer in the same session
-                        List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
-                        userAnswers.Add(userAnswer);
+                        SAnswer userAnswer = new SAnswer();
 
-                        Session["Answers"] = userAnswers;
-                    }
-                    else
-                    {
-                        // Store the first answer in a newly created List
-                        List<SAnswer> userAnswers = new List<SAnswer>();
-                        userAnswers.Add(userAnswer);
+                        userAnswer.aText = textBox.Text;
+                        userAnswer.aID = (int)Session["CurrentQuestionID"];
+                        userAnswer.qID = Int16.Parse(textBox.Attributes["questionId"]);
 
-                        Session["Answers"] = userAnswers;
+                        // Storing answers in a Session
+                        if (Session["Answers"] != null)
+                        {
+                            // Store each following Answer in the same session
+                            List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
+                            userAnswers.Add(userAnswer);
+
+                            Session["Answers"] = userAnswers;
+                        }
+                        else
+                        {
+                            // Store the first answer in a newly created List
+                            List<SAnswer> userAnswers = new List<SAnswer>();
+                            userAnswers.Add(userAnswer);
+
+                            Session["Answers"] = userAnswers;
+                        }
+
                     }
 
                 }
-               
-            }
-            else if ("radio".Equals(question.qType))
-            {
-                RadioButtonList radioButton = (RadioButtonList)QuestionPlaceholder.FindControl("RadioQuestion"); // Get the question from the placeholder                
-
-                if (radioButton.SelectedValue != null)
+                else if ("radio".Equals(question.qType))
                 {
-                    SAnswer userAnswer = new SAnswer();
+                    RadioButtonList radioButton = (RadioButtonList)QuestionPlaceholder.FindControl("RadioQuestion"); // Get the question from the placeholder                
 
-                    userAnswer.aText = radioButton.SelectedItem.Text;
-                    userAnswer.aID = (int)Session["CurrentQuestionID"];
-                    userAnswer.qID = Int16.Parse(radioButton.Attributes["questionId"]);
-
-                    // Storing answers in a Session
-                    if (Session["Answers"] != null)
+                    if (radioButton.SelectedValue != null)
                     {
-                        // Store each following Answer in the same session
-                        List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
-                        userAnswers.Add(userAnswer);
+                        SAnswer userAnswer = new SAnswer();
 
-                        Session["Answers"] = userAnswers;
-                    }
-                    else
-                    {
-                        // Store the first answer in a newly created List
-                        List<SAnswer> userAnswers = new List<SAnswer>();
-                        userAnswers.Add(userAnswer);
+                        userAnswer.aText = radioButton.SelectedItem.Text;
+                        userAnswer.aID = (int)Session["CurrentQuestionID"];
+                        userAnswer.qID = Int16.Parse(radioButton.Attributes["questionId"]);
 
-                        Session["Answers"] = userAnswers;
+                        // Storing answers in a Session
+                        if (Session["Answers"] != null)
+                        {
+                            // Store each following Answer in the same session
+                            List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
+                            userAnswers.Add(userAnswer);
+
+                            Session["Answers"] = userAnswers;
+                        }
+                        else
+                        {
+                            // Store the first answer in a newly created List
+                            List<SAnswer> userAnswers = new List<SAnswer>();
+                            userAnswers.Add(userAnswer);
+
+                            Session["Answers"] = userAnswers;
+                        }
+
                     }
 
                 }
+                else if ("checkbox".Equals(question.qType))
+                {
+                    CheckBoxList checkButton = (CheckBoxList)QuestionPlaceholder.FindControl("CheckboxQuestion"); // Get the question from the placeholder
+
+                    if (checkButton.SelectedValue != null)
+                    {
+                        SAnswer userAnswer = new SAnswer();
+
+                        userAnswer.aText = checkButton.SelectedItem.Text;
+                        userAnswer.aID = (int)Session["CurrentQuestionID"];
+                        userAnswer.qID = Int16.Parse(checkButton.Attributes["questionId"]);
+
+
+                        // Storing answers in a Session, make a method to call for each different type of question
+                        if (Session["Answers"] != null)
+                        {
+                            // Store each following Answer in the same session
+                            List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
+                            userAnswers.Add(userAnswer);
+
+                            Session["Answers"] = userAnswers;
+                        }
+                        else
+                        {
+                            // Store the first answer in a newly created List
+                            List<SAnswer> userAnswers = new List<SAnswer>();
+                            userAnswers.Add(userAnswer);
+
+                            Session["Answers"] = userAnswers;
+                        }
+
+                    }
+
+                }
+                else if ("dropdown".Equals(question.qType))
+                {
+                    DropDownList dropButton = (DropDownList)QuestionPlaceholder.FindControl("DropdownQuestion"); // Get the question from the placeholder
+
+                    if (dropButton.SelectedValue != null)
+                    {
+                        SAnswer userAnswer = new SAnswer();
+
+                        userAnswer.aText = dropButton.SelectedItem.Text;
+                        userAnswer.aID = (int)Session["CurrentQuestionID"];
+                        userAnswer.qID = Int16.Parse(dropButton.Attributes["questionId"]);
+
+                        // Storing answers in a Session, make a method to call for each different type of question
+                        if (Session["Answers"] != null)
+                        {
+                            // Store each following Answer in the same session
+                            List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
+                            userAnswers.Add(userAnswer);
+
+                            Session["Answers"] = userAnswers;
+                        }
+                        else
+                        {
+                            // Store the first answer in a newly created List
+                            List<SAnswer> userAnswers = new List<SAnswer>();
+                            userAnswers.Add(userAnswer);
+
+                            Session["Answers"] = userAnswers;
+                        }
+
+                    }
+
+                }
+
                 
             }
-            else if ("checkbox".Equals(question.qType))
+            catch (Exception)
             {
-                CheckBoxList checkButton = (CheckBoxList)QuestionPlaceholder.FindControl("CheckboxQuestion"); // Get the question from the placeholder
-
-                if (checkButton.SelectedValue != null)
-                {
-                    SAnswer userAnswer = new SAnswer();
-
-                    userAnswer.aText = checkButton.SelectedItem.Text;
-                    userAnswer.aID = (int)Session["CurrentQuestionID"];
-                    userAnswer.qID = Int16.Parse(checkButton.Attributes["questionId"]);
-
-
-                    // Storing answers in a Session, make a method to call for each different type of question
-                    if (Session["Answers"] != null)
-                    {
-                        // Store each following Answer in the same session
-                        List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
-                        userAnswers.Add(userAnswer);
-
-                        Session["Answers"] = userAnswers;
-                    }
-                    else
-                    {
-                        // Store the first answer in a newly created List
-                        List<SAnswer> userAnswers = new List<SAnswer>();
-                        userAnswers.Add(userAnswer);
-
-                        Session["Answers"] = userAnswers;
-                    }
-
-                }
-
-            }
-            else if ("dropdown".Equals(question.qType))
-            {
-                DropDownList dropButton = (DropDownList)QuestionPlaceholder.FindControl("DropdownQuestion"); // Get the question from the placeholder
-
-                if (dropButton.SelectedValue != null)
-                {
-                    SAnswer userAnswer = new SAnswer();
-
-                    userAnswer.aText = dropButton.SelectedItem.Text;
-                    userAnswer.aID = (int)Session["CurrentQuestionID"];
-                    userAnswer.qID = Int16.Parse(dropButton.Attributes["questionId"]);
-
-                    // Storing answers in a Session, make a method to call for each different type of question
-                    if (Session["Answers"] != null)
-                    {
-                        // Store each following Answer in the same session
-                        List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
-                        userAnswers.Add(userAnswer);
-
-                        Session["Answers"] = userAnswers;
-                    }
-                    else
-                    {
-                        // Store the first answer in a newly created List
-                        List<SAnswer> userAnswers = new List<SAnswer>();
-                        userAnswers.Add(userAnswer);
-
-                        Session["Answers"] = userAnswers;
-                    }
-
-                }
-
+                Response.Redirect("~/ErrorPages/ErrorPage.aspx");
+                throw;
             }
 
             if ((int)Session["NextQID"] == 12)
-            {                
+            {
                 // Simulate end of survey
                 Response.Redirect("~/RegisterQuestion.aspx");
             }

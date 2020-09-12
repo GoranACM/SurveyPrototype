@@ -1,4 +1,14 @@
-﻿using SurveyPrototype.SurveyEntities;
+﻿/*  
+ *  Project: AITResearch
+ *  
+ *  Developed by: Goran Ilievski
+ *  ID: #7108
+ *  Date: 30/08/2020
+ *  
+ *  Subject: Data-Driven Apps
+ */
+
+using SurveyPrototype.SurveyEntities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,21 +22,30 @@ namespace SurveyPrototype.SurveyDBUtilities
     {
         public static void InsertRespondent(SRespondent respondent)
         {
-            string cn = ConfigurationManager.ConnectionStrings["SurveyDatabase"].ToString();
-            using (SqlConnection con = new SqlConnection(cn))
+            try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO SRespondent VALUES (@sRespondentID, @sRFirstName, @sRLastName, @sRDateOfBirth, @sRPhoneNumber, @sRIpAddress, @sRDateStamp)", con);
+                string cn = ConfigurationManager.ConnectionStrings["SurveyDatabase"].ToString();
+                using (SqlConnection con = new SqlConnection(cn))
+                {
+                    SqlCommand cmd = new SqlCommand("INSERT INTO SRespondent VALUES (@sRespondentID, @sRFirstName, @sRLastName, @sRDateOfBirth, @sRPhoneNumber, @sRIpAddress, @sRDateStamp)", con);
 
-                cmd.Parameters.AddWithValue("@sRespondentID", respondent.rID);
-                cmd.Parameters.AddWithValue("@sRFirstName", respondent.rFirstName);
-                cmd.Parameters.AddWithValue("@sRLastName", respondent.rLastName);
-                cmd.Parameters.AddWithValue("@sRDateOfBirth", respondent.rDateOfBirth);
-                cmd.Parameters.AddWithValue("@sRPhoneNumber", respondent.rPhoneNumber);
-                cmd.Parameters.AddWithValue("@sRIpAddress", respondent.rIpAddress);
-                cmd.Parameters.AddWithValue("@sRDateStamp", respondent.rDateStamp);
-                con.Open();
-                cmd.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("@sRespondentID", respondent.rID);
+                    cmd.Parameters.AddWithValue("@sRFirstName", respondent.rFirstName);
+                    cmd.Parameters.AddWithValue("@sRLastName", respondent.rLastName);
+                    cmd.Parameters.AddWithValue("@sRDateOfBirth", respondent.rDateOfBirth);
+                    cmd.Parameters.AddWithValue("@sRPhoneNumber", respondent.rPhoneNumber);
+                    cmd.Parameters.AddWithValue("@sRIpAddress", respondent.rIpAddress);
+                    cmd.Parameters.AddWithValue("@sRDateStamp", respondent.rDateStamp);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
         public static int InsertSession(string sessionID)

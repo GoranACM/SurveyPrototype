@@ -1,4 +1,14 @@
-﻿using SurveyPrototype.SurveyEntities;
+﻿/*  
+ *  Project: AITResearch
+ *  
+ *  Developed by: Goran Ilievski
+ *  ID: #7108
+ *  Date: 30/08/2020
+ *  
+ *  Subject: Data-Driven Apps
+ */
+
+using SurveyPrototype.SurveyEntities;
 using SurveyPrototype.SurveyDBUtilities;
 using System;
 using System.Collections.Generic;
