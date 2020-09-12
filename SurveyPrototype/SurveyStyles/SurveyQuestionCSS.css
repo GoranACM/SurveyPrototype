@@ -79,9 +79,24 @@ header h1 {
 }
 
 /* Dropdown questions */
-
+.drop-down {
+    height: 30px;
+    width: 220px;
+    font-family: Roboto;
+    border-color: #5dbcd2;
+    border-width: 2px;
+}
 
 /* Text questions */
-
+.text-box {
+    height: 30px; 
+    width: 220px;
+    font-family: Roboto; 
+    border-color: #5dbcd2; 
+    border-width: 2px;
+}
 
 /* Checkbox questions */
+.check-box {
+
+}

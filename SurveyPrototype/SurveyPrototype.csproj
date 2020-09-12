@@ -70,8 +70,11 @@
     <Content Include="SurveyImages\aitr.png" />
     <Content Include="SurveyImages\arrow.png" />
     <Content Include="SurveyImages\favicon.ico" />
+    <Content Include="SurveyUserControl\CheckboxQuestionControl.ascx" />
+    <Content Include="SurveyUserControl\DropdownQuestionControl.ascx" />
     <Content Include="SurveyUserControl\RadioQuestionControl.ascx" />
     <Content Include="SurveyPages\Staff.aspx" />
+    <Content Include="SurveyUserControl\TextQuestionControl.ascx" />
     <Content Include="Survey\Register.aspx" />
     <Content Include="Survey\RegisterQuestion.aspx" />
     <Content Include="Survey\Survey.aspx" />
@@ -92,6 +95,20 @@
     <Compile Include="SurveyEntities\SQuestionOptions.cs" />
     <Compile Include="SurveyEntities\SRespondent.cs" />
     <Compile Include="SurveyEntities\SSession.cs" />
+    <Compile Include="SurveyUserControl\CheckboxQuestionControl.ascx.cs">
+      <DependentUpon>CheckboxQuestionControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SurveyUserControl\CheckboxQuestionControl.ascx.designer.cs">
+      <DependentUpon>CheckboxQuestionControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyUserControl\DropdownQuestionControl.ascx.cs">
+      <DependentUpon>DropdownQuestionControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SurveyUserControl\DropdownQuestionControl.ascx.designer.cs">
+      <DependentUpon>DropdownQuestionControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="SurveyUserControl\RadioQuestionControl.ascx.cs">
       <DependentUpon>RadioQuestionControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -105,6 +122,13 @@
     </Compile>
     <Compile Include="SurveyPages\Staff.aspx.designer.cs">
       <DependentUpon>Staff.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyUserControl\TextQuestionControl.ascx.cs">
+      <DependentUpon>TextQuestionControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SurveyUserControl\TextQuestionControl.ascx.designer.cs">
+      <DependentUpon>TextQuestionControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Survey\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
