@@ -17,7 +17,7 @@ namespace SurveyPrototype.SurveyPages
         protected void surveyStartButton_Click(object sender, ImageClickEventArgs e)
         {
             // TODO: Check why I cannot move without validation of login buttons
-            Response.Redirect("~/Survey/Survey.aspx");         
+            Response.Redirect("~/Survey/Survey.aspx", true);         
         }
 
     }
