@@ -10,6 +10,7 @@ namespace SurveyPrototype.SurveyPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             int nextQID = 1;
 
             // Check if the next question ID is not null to show the new question
@@ -22,7 +23,7 @@ namespace SurveyPrototype.SurveyPages
                 Session["NextQID"] = nextQID;
             }
 
-            // Load the first question
+            // Load the first question and the options
             SQuestion question = SQuestionDAO.GetQuestionById(nextQID);
             List<SQuestionOptions> questionOptions = SQuestionDAO.GetQuestionOptionsById(nextQID);
 
@@ -30,60 +31,63 @@ namespace SurveyPrototype.SurveyPages
             {
                 if (null != question && null != questionOptions)
                 {
-                    QuestionLabel.Text = question.qText; // Pass the text from the question entity to the label
+                    // Passing the text from the question entity to the label
+                    // outside of the question Options
+                    QuestionLabel.Text = question.qText; 
 
+                    // Four IF statements for 4 types of questions
                     if ("text".Equals(question.qType))
                     {
-
-                        TextBox txtBox = new TextBox(); // User controled box and not dinamically like this
-                        txtBox.Attributes["questionID"] = question.qID.ToString(); // Has to be a string and pass to Next button
-                        txtBox.ID = "TextQuestion";
-                        QuestionPlaceholder.Controls.Add(txtBox);
+                        TextBox txtBox = new TextBox(); // User controled box goes here
+                        txtBox.Attributes["questionID"] = question.qID.ToString(); // Convert to string and pass to Next button
+                        txtBox.ID = "TextQuestion"; // Give it an ID
+                        QuestionPlaceholder.Controls.Add(txtBox); // Add to placeholder
                         Session["CurrentQuestionID"] = question.nQuestion + 1; // Save to a session to use on Next button
                     }
                     else if ("radio".Equals(question.qType))
                     {                       
+                        RadioButtonList radioButtonList = new RadioButtonList(); // User controled box goes here
+                        radioButtonList.Attributes["questionID"] = question.qID.ToString(); // Convert to string and pass to Next button
+                        radioButtonList.ID = "RadioQuestion"; // Give it an ID
 
-                        RadioButtonList radioButtonList = new RadioButtonList();
-                        radioButtonList.Attributes["questionID"] = question.qID.ToString();
-                        radioButtonList.ID = "RadioQuestion";
-
-                        foreach (SQuestionOptions option in questionOptions)
+                        foreach (SQuestionOptions option in questionOptions) // Iterate through options
                         {
-                            radioButtonList.Items.Add(new ListItem(option.qOptionText));
+                            radioButtonList.Items.Add(new ListItem(option.qOptionText)); // Add each option to list
                         }
 
-                        QuestionPlaceholder.Controls.Add(radioButtonList);
+                        QuestionPlaceholder.Controls.Add(radioButtonList); // Add to placeholder
 
-                        Session["CurrentQuestionID"] = question.nQuestion + 1;
-                        
+                        Session["CurrentQuestionID"] = question.nQuestion + 1; // Save to a session to use on Next button
+
                     }
                     else if ("checkbox".Equals(question.qType))
                     {
-                        CheckBoxList checkBoxList = new CheckBoxList(); // User controled box and not dinamically like this
-                        checkBoxList.Attributes["questionID"] = question.qID.ToString(); // Has to be a string and pass to Next button
-                        checkBoxList.ID = "CheckboxQuestion";
+                        CheckBoxList checkBoxList = new CheckBoxList(); // User controled box goes here
+                        checkBoxList.Attributes["questionID"] = question.qID.ToString(); // Convert to string and pass to Next button
+                        checkBoxList.ID = "CheckboxQuestion"; // Give it an ID
 
-                        foreach (SQuestionOptions option in questionOptions)
+                        foreach (SQuestionOptions option in questionOptions) // Iterate through options
                         {
-                            checkBoxList.Items.Add(new ListItem(option.qOptionText));
+                            checkBoxList.Items.Add(new ListItem(option.qOptionText)); // Add each option to list
                         }
 
-                        QuestionPlaceholder.Controls.Add(checkBoxList);
+                        QuestionPlaceholder.Controls.Add(checkBoxList); // Add to placeholder
+
                         Session["CurrentQuestionID"] = question.nQuestion + 1; // Save to a session to use on Next button
                     }
                     else if ("dropdown".Equals(question.qType))
                     {
-                        DropDownList dropDownList = new DropDownList(); // User controled box and not dinamically like this
-                        dropDownList.Attributes["questionID"] = question.qID.ToString(); // Has to be a string and pass to Next button
-                        dropDownList.ID = "DropDownQuestion";
+                        DropDownList dropDownList = new DropDownList(); // User controled box goes here
+                        dropDownList.Attributes["questionID"] = question.qID.ToString(); // Convert to string and pass to Next button
+                        dropDownList.ID = "DropDownQuestion"; // Give it an ID
 
-                        foreach (SQuestionOptions option in questionOptions)
+                        foreach (SQuestionOptions option in questionOptions) // Iterate through options
                         {
-                            dropDownList.Items.Add(new ListItem(option.qOptionText));
+                            dropDownList.Items.Add(new ListItem(option.qOptionText)); // Add each option to list
                         }
 
-                        QuestionPlaceholder.Controls.Add(dropDownList);
+                        QuestionPlaceholder.Controls.Add(dropDownList); // Add to placeholder
+
                         Session["CurrentQuestionID"] = question.nQuestion + 1; // Save to a session to use on Next button
                     }
                 }
@@ -103,9 +107,10 @@ namespace SurveyPrototype.SurveyPages
 
             SQuestion question = SQuestionDAO.GetQuestionById(nextQuestionId);
 
+            // Method to call each different type of question
             if ("text".Equals(question.qType))
             {
-                TextBox textBox = (TextBox)QuestionPlaceholder.FindControl("RadioQuestion");
+                TextBox textBox = (TextBox)QuestionPlaceholder.FindControl("RadioQuestion"); // Get the question from the placeholder
 
                 if (textBox != null)
                 {
@@ -115,8 +120,7 @@ namespace SurveyPrototype.SurveyPages
                     userAnswer.aID = (int)Session["CurrentQuestionID"];
                     userAnswer.qID = Int16.Parse(textBox.Attributes["questionId"]);
 
-
-                    // Storing answers in a Session, make a method to call for each different type of question
+                    // Storing answers in a Session
                     if (Session["Answers"] != null)
                     {
                         // Store each following Answer in the same session
@@ -134,15 +138,12 @@ namespace SurveyPrototype.SurveyPages
                         Session["Answers"] = userAnswers;
                     }
 
-                    Response.Write("Answer : " + textBox.Text);
                 }
-
-
-                
+               
             }
             else if ("radio".Equals(question.qType))
             {
-                RadioButtonList radioButton = (RadioButtonList)QuestionPlaceholder.FindControl("RadioQuestion");                
+                RadioButtonList radioButton = (RadioButtonList)QuestionPlaceholder.FindControl("RadioQuestion"); // Get the question from the placeholder                
 
                 if (radioButton.SelectedValue != null)
                 {
@@ -152,8 +153,7 @@ namespace SurveyPrototype.SurveyPages
                     userAnswer.aID = (int)Session["CurrentQuestionID"];
                     userAnswer.qID = Int16.Parse(radioButton.Attributes["questionId"]);
 
-
-                    // Storing answers in a Session, make a method to call for each different type of question
+                    // Storing answers in a Session
                     if (Session["Answers"] != null)
                     {
                         // Store each following Answer in the same session
@@ -171,15 +171,12 @@ namespace SurveyPrototype.SurveyPages
                         Session["Answers"] = userAnswers;
                     }
 
-                    Response.Write("Answer : " + radioButton.SelectedValue.ToString());
                 }
-
-
                 
             }
             else if ("checkbox".Equals(question.qType))
             {
-                CheckBoxList checkButton = (CheckBoxList)QuestionPlaceholder.FindControl("CheckboxQuestion");
+                CheckBoxList checkButton = (CheckBoxList)QuestionPlaceholder.FindControl("CheckboxQuestion"); // Get the question from the placeholder
 
                 if (checkButton.SelectedValue != null)
                 {
@@ -208,15 +205,12 @@ namespace SurveyPrototype.SurveyPages
                         Session["Answers"] = userAnswers;
                     }
 
-                    Response.Write("Answer : " + checkButton.SelectedValue.ToString());
                 }
-
-
 
             }
             else if ("dropdown".Equals(question.qType))
             {
-                DropDownList dropButton = (DropDownList)QuestionPlaceholder.FindControl("DropdownQuestion");
+                DropDownList dropButton = (DropDownList)QuestionPlaceholder.FindControl("DropdownQuestion"); // Get the question from the placeholder
 
                 if (dropButton.SelectedValue != null)
                 {
@@ -225,7 +219,6 @@ namespace SurveyPrototype.SurveyPages
                     userAnswer.aText = dropButton.SelectedItem.Text;
                     userAnswer.aID = (int)Session["CurrentQuestionID"];
                     userAnswer.qID = Int16.Parse(dropButton.Attributes["questionId"]);
-
 
                     // Storing answers in a Session, make a method to call for each different type of question
                     if (Session["Answers"] != null)
@@ -245,21 +238,18 @@ namespace SurveyPrototype.SurveyPages
                         Session["Answers"] = userAnswers;
                     }
 
-                    Response.Write("Answer : " + dropButton.SelectedValue.ToString());
                 }
-
-
 
             }
 
-            if ((int)Session["NextQID"] > 3)
-            {
+            if ((int)Session["NextQID"] == 12)
+            {                
                 // Simulate end of survey
-                Response.Redirect("~/EndSurvey.aspx");
+                Response.Redirect("~/RegisterQuestion.aspx");
             }
             else
             {
-                Response.Redirect("~/Survey.aspx");
+                Response.Redirect("~/Survey/Survey.aspx");
             }
         }
     }

@@ -16,12 +16,14 @@ using System.Web;
 namespace SurveyPrototype.SurveyEntities
 {
     /// <summary>
-    /// SAnswerOptions is the object that represents the options in the survey answers
+    /// SAnsweredQuestions is the object that represents the survey answers
     /// </summary>
-    public class SAnswerOptions
+    public class SAnsweredQuestions
     {
-        public int aOptionID { get; set; }
+        public int sAnsweredQuestionID { get; set; }
         public int aID { get; set; }
-        public string aAnswerText { get; set; }
+        public int qID { get; set; }
+        public int rID { get; set; }
+        public string aAnsweredQuestionText { get; set; }
     }
 }

@@ -77,10 +77,17 @@ namespace SurveyPrototype.SurveyDBUtilities
                     sQuestionOptions.qID = (int)reader["sQuestionID"];
                     sQuestionOptions.qOptionText = reader["sQuestionOptionText"].ToString();
                     sQuestionOptions.qOptionID = (int)reader["sQuestionOptionID"];
-                    if ((int?)reader["sNextQuestionID"] != null)
+                    if (reader["sNextQuestionID"] != null)
                     {
+                        
                         sQuestionOptions.nQuestion = (int?)reader["sNextQuestionID"];
                     }
+                    //else if (reader["sNextQuestionID"] == null)
+                    //{
+                    //    sQuestionOptions.nQuestion = 12;
+
+                    //    sQuestionOptions.nQuestion = (int?)reader["sNextQuestionID"];
+                    //}
 
                     questionOptions.Add(sQuestionOptions);
                 }

@@ -20,7 +20,7 @@
     </header>
     <form id="form1" runat="server">
         <div class="container">
-            <div class="center">                
+            <div class="center">    
                 <asp:Table ID="Table1" runat="server" style="border-right: 3px solid #5dbcd2; display: flex" Width="300px">
                 <asp:TableRow>
                     <asp:TableCell>
@@ -45,7 +45,7 @@
                             AlternateText="AITResearch"
                             Width="150px"
                             Height="150px"
-                            ImageUrl="~/SurveyImages/aitr.png" OnClick="surveyStartButton_Click" />
+                            ImageUrl="~/SurveyImages/aitr.png" OnClick="surveyStartButton_Click" causesvalidation="false"/>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
