@@ -53,29 +53,48 @@ namespace SurveyPrototype.SurveyDBUtilities
             string cn = ConfigurationManager.ConnectionStrings["SurveyDatabase"].ToString();
             using (SqlConnection con = new SqlConnection(cn))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO SSession (sRespondentID) OUTPUT INSERTED.ID VALUES (@sRespondentID)", con);
+                SqlCommand cmd = new SqlCommand("INSERT INTO SSession (sSessionID) OUTPUT INSERTED.ID VALUES (@sSessionID)", con);
 
-                cmd.Parameters.AddWithValue("@sRespondentID", sessionID);
+                cmd.Parameters.AddWithValue("@sSessionID", sessionID);
+
                 con.Open();
+
                 return (int)cmd.ExecuteScalar();
             }
+            //try
+            //{
+              
+            //}
+            //catch (Exception)
+            //{
+
+            //    throw;
+            //}           
         }
 
         public static void InsertSurvey(SAnsweredQuestions answeredQuestions)
         {
-            string cn = ConfigurationManager.ConnectionStrings["SurveyDatabase"].ToString();
-            using (SqlConnection con = new SqlConnection(cn))
+            try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO SAnsweredQuestions VALUES(@sAnsweredQuestionID, @sAnswerID, @sQuestionID, @sRespondentID, @sAnsweredQuestionText");
-                
-                cmd.Parameters.AddWithValue("@sAnsweredQuestionID", answeredQuestions.sAnsweredQuestionID);
-                cmd.Parameters.AddWithValue("@sAnswerID", answeredQuestions.aID);
-                cmd.Parameters.AddWithValue("@sQuestionID", answeredQuestions.qID);
-                cmd.Parameters.AddWithValue("@sRespondentID", answeredQuestions.rID);
-                cmd.Parameters.AddWithValue("@sAnsweredQuestionText", answeredQuestions.aAnsweredQuestionText);
-                con.Open();
-                cmd.ExecuteNonQuery();
+                string cn = ConfigurationManager.ConnectionStrings["SurveyDatabase"].ToString();
+                using (SqlConnection con = new SqlConnection(cn))
+                {
+                    SqlCommand cmd = new SqlCommand("INSERT INTO SAnsweredQuestions VALUES(@sAnsweredQuestionID, @sAnswerID, @sQuestionID, @sRespondentID, @sAnsweredQuestionText");
+
+                    cmd.Parameters.AddWithValue("@sAnsweredQuestionID", answeredQuestions.sAnsweredQuestionID);
+                    cmd.Parameters.AddWithValue("@sAnswerID", answeredQuestions.aID);
+                    cmd.Parameters.AddWithValue("@sQuestionID", answeredQuestions.qID);
+                    cmd.Parameters.AddWithValue("@sRespondentID", answeredQuestions.rID);
+                    cmd.Parameters.AddWithValue("@sAnsweredQuestionText", answeredQuestions.aAnsweredQuestionText);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }            
         }
     }
 }

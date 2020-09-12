@@ -5,8 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-    <link rel="SHORTCUT ICON" href="~/SurveyImages/favicon.ico"/>
-    <link href="~/SurveyStyles/SurveyMainCSS.css" rel="stylesheet" />
+    <link rel="SHORTCUT ICON" href="~/SurveyImages/favicon.ico"/>    
     <link href="~/SurveyStyles/SurveyQuestionCSS.css" rel="stylesheet" />
     <title>AITR Survey Register</title>
 </head>
@@ -78,12 +77,17 @@
                             <asp:RequiredFieldValidator ID="phoneNumberValidator" runat="server" ErrorMessage="Last name Required" ControlToValidate="PhoneNumberBox" CssClass="validator"></asp:RequiredFieldValidator>
                         </asp:TableCell>
                     </asp:TableRow>
+                    <asp:TableRow>
+                        <asp:TableCell>
+                            <div style="margin-top: 30px; margin-left: 80px;">
+                                <asp:Button ID="registerBtn" runat="server" Text="Register" CssClass="button" OnClick="registerBtn_Click"  />
+                            </div>                            
+                        </asp:TableCell>
+                    </asp:TableRow>                        
                 </asp:Table>
             </div>
             <div>
-                <div>
-                    <asp:Button ID="registerBtn" runat="server" Text="Register" CssClass="button"/>
-                </div>
+                
             </div>
         </div>       
     </form>

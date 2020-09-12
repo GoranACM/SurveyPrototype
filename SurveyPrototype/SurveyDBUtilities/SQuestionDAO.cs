@@ -80,7 +80,7 @@ namespace SurveyPrototype.SurveyDBUtilities
                     if (reader["sNextQuestionID"] != null)
                     {
                         
-                        sQuestionOptions.nQuestion = (int?)reader["sNextQuestionID"];
+                        sQuestionOptions.nQuestion = reader["sNextQuestionID"] as int?;
                     }
                     //else if (reader["sNextQuestionID"] == null)
                     //{

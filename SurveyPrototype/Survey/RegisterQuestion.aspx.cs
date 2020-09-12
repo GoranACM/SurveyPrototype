@@ -24,7 +24,7 @@ namespace SurveyPrototype.Survey
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            int respondentId = SRespondentDAO.InsertSession(Session.SessionID);
+            int rID = SRespondentDAO.InsertSession(Session.SessionID);
 
             //int respondentId = 1;
 
@@ -33,7 +33,7 @@ namespace SurveyPrototype.Survey
             foreach (SAnswer ans in userAnswers)
             {
                 TableRow ansRow = new TableRow();
-                ans.rID = respondentId;
+                ans.rID = rID;
 
                 TableCell questionIDCell = new TableCell();
                 questionIDCell.Text = ans.aID.ToString();
@@ -72,6 +72,7 @@ namespace SurveyPrototype.Survey
             }
             catch (Exception)
             {
+                Response.Redirect("~/ErrorPages/ErrorPage.aspx");
                 throw;
             }
         }
