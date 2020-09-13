@@ -10,8 +10,10 @@
 
 using SurveyPrototype.SurveyDBUtilities;
 using SurveyPrototype.SurveyEntities;
+using SurveyPrototype.SurveyUtilities;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.UI.WebControls;
 
 namespace SurveyPrototype.SurveyPages
@@ -22,7 +24,7 @@ namespace SurveyPrototype.SurveyPages
         {
             
             int nextQID = 1;
-
+            
             // Check if the next question ID is not null to show the new question
             if (Session["NextQID"] != null)
             {
@@ -33,10 +35,44 @@ namespace SurveyPrototype.SurveyPages
                 Session["NextQID"] = nextQID;
             }
 
+            try
+            {
+                // Make sure to save Respondent once
+                if (string.IsNullOrEmpty((string)Session["User"]))
+                {
+                    // Grab the User IP and save to variable
+                    string userIP = SurveyUtil.getUserIP();
+
+                    // Check if the IP Address has been captured
+                    if (userIP != null)
+                    {
+                        // Create a new respondent
+                        SRespondent respondent = new SRespondent();
+
+                        // Give him Anonymous name
+                        respondent.rFirstName = "Anonymous";
+                        // Save the IP
+                        respondent.rIpAddress = userIP;
+                        // Save the current date
+                        respondent.rDateStamp = DateTime.Now;
+                        // Insert the respondent in the DB
+                        SRespondentDAO.InsertRespondent(respondent);
+                        // Save IP to a Session
+                        Session["User"] = userIP;
+                    }
+                }
+               
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             // Load the first question and the options
             SQuestion question = SQuestionDAO.GetQuestionById(nextQID);
             List<SQuestionOptions> questionOptions = SQuestionDAO.GetQuestionOptionsById(nextQID);
-
+          
             try
             {
                 if (null != question && null != questionOptions)
@@ -122,7 +158,7 @@ namespace SurveyPrototype.SurveyPages
                 // Method to call each different type of question
                 if ("text".Equals(question.qType))
                 {
-                    TextBox textBox = (TextBox)QuestionPlaceholder.FindControl("RadioQuestion"); // Get the question from the placeholder
+                    TextBox textBox = (TextBox)QuestionPlaceholder.FindControl("TextQuestion"); // Get the question from the placeholder
 
                     if (textBox != null)
                     {
@@ -264,8 +300,8 @@ namespace SurveyPrototype.SurveyPages
 
             if ((int)Session["NextQID"] == 12)
             {
-                // Simulate end of survey
-                Response.Redirect("~/RegisterQuestion.aspx");
+                // Move to register question page
+                Response.Redirect("~/Survey/RegisterQuestion.aspx");
             }
             else
             {

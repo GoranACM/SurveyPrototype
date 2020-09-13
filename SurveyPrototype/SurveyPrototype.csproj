@@ -98,7 +98,6 @@
     <Compile Include="SurveyDBUtilities\SurveyDBConnector.cs" />
     <Compile Include="SurveyEntities\AITRStaff.cs" />
     <Compile Include="SurveyEntities\SAnswer.cs" />
-    <Compile Include="SurveyEntities\SAnsweredQuestions.cs" />
     <Compile Include="SurveyEntities\SQuestion.cs" />
     <Compile Include="SurveyEntities\SQuestionOptions.cs" />
     <Compile Include="SurveyEntities\SRespondent.cs" />
@@ -138,6 +137,7 @@
     <Compile Include="SurveyUserControl\TextQuestionControl.ascx.designer.cs">
       <DependentUpon>TextQuestionControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="SurveyUtilities\SurveyUtil.cs" />
     <Compile Include="Survey\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

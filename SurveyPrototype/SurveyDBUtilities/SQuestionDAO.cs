@@ -17,7 +17,7 @@ using System.Data.SqlClient;
 namespace SurveyPrototype.SurveyDBUtilities
 {
     /// <summary>
-    /// Class for accessing the SQuestion table in DB
+    /// Class for accessing the Question tables in DB
     /// </summary>
     public class SQuestionDAO
     {
@@ -55,6 +55,11 @@ namespace SurveyPrototype.SurveyDBUtilities
             return question;
         }
 
+        /// <summary>
+        /// Method for a DB query to get the question options by the Question ID
+        /// </summary>
+        /// <param name="questionID"></param>
+        /// <returns>List of question options</returns>
         public static List<SQuestionOptions> GetQuestionOptionsById(int questionID)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["SurveyDatabase"].ConnectionString;
@@ -63,9 +68,7 @@ namespace SurveyPrototype.SurveyDBUtilities
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 // Execute the SQL Command
-                SqlCommand cmd = new SqlCommand("SELECT * " +
-                                                "FROM SQuestionOptions " +
-                                                "WHERE sQuestionID = @sQuestionID", con);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM SQuestionOptions WHERE sQuestionID = @sQuestionID", con);
                 cmd.Parameters.AddWithValue("@sQuestionID", questionID);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -78,16 +81,9 @@ namespace SurveyPrototype.SurveyDBUtilities
                     sQuestionOptions.qOptionText = reader["sQuestionOptionText"].ToString();
                     sQuestionOptions.qOptionID = (int)reader["sQuestionOptionID"];
                     if (reader["sNextQuestionID"] != null)
-                    {
-                        
+                    {                        
                         sQuestionOptions.nQuestion = reader["sNextQuestionID"] as int?;
                     }
-                    //else if (reader["sNextQuestionID"] == null)
-                    //{
-                    //    sQuestionOptions.nQuestion = 12;
-
-                    //    sQuestionOptions.nQuestion = (int?)reader["sNextQuestionID"];
-                    //}
 
                     questionOptions.Add(sQuestionOptions);
                 }

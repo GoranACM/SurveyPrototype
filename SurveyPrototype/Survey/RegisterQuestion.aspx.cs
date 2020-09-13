@@ -26,10 +26,8 @@ namespace SurveyPrototype.Survey
 
             int rID = SRespondentDAO.InsertSession(Session.SessionID);
 
-            //int respondentId = 1;
-
             List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
-
+                       
             foreach (SAnswer ans in userAnswers)
             {
                 TableRow ansRow = new TableRow();
@@ -45,7 +43,22 @@ namespace SurveyPrototype.Survey
                 ansRow.Cells.Add(answerCell);
 
                 UserAnswerTable.Rows.Add(ansRow);
+
+                //if (userAnswers != null && userAnswers.Count == 11)
+                //{
+                //    SRespondentDAO.InsertSurvey(ans);
+                //}
             }
+
+            List<SAnswer> userAnsweredQuestions = (List<SAnswer>)Session["Answers"];
+
+            //if (userAnsweredQuestions != null && userAnsweredQuestions.Count > 12)
+            //{
+                foreach (SAnswer answer in userAnsweredQuestions)
+                {
+                    SRespondentDAO.InsertSurvey(answer);
+                }
+            //}
 
             SQuestion question = SQuestionDAO.GetQuestionById(12);
             List<SQuestionOptions> questionOptions = SQuestionDAO.GetQuestionOptionsById(12);
@@ -58,6 +71,7 @@ namespace SurveyPrototype.Survey
                     // outside of the question Options
                     QuestionLabel.Text = question.qText;
 
+                    // TODO: Check why the radio buttons do not show up
                     RadioButtonList radioButtonList = new RadioButtonList(); // User controled box goes here
                     radioButtonList.Attributes["questionID"] = question.qID.ToString(); // Convert to string and pass to Next button
                     radioButtonList.ID = "RadioQuestion"; // Give it an ID
