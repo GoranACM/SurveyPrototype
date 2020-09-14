@@ -21,7 +21,13 @@ namespace SurveyPrototype.SurveyUserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.AnswerBox = null;
+        }
 
+        public TextBox AnswerBox
+        {
+            get { return AnswerBox; }
+            set { AnswerBox = value; }
         }
     }
 }

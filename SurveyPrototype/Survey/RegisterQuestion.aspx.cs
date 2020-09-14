@@ -24,7 +24,8 @@ namespace SurveyPrototype.Survey
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            int rID = SRespondentDAO.InsertSession(Session.SessionID);
+            int rID = SRespondentDAO.InsertSession(sessionID: Session.SessionID);
+            //int rID = SRespondentDAO.InsertSession(Session.SessionID, (int)Session["UserID"]);
 
             List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
                        
@@ -44,21 +45,9 @@ namespace SurveyPrototype.Survey
 
                 UserAnswerTable.Rows.Add(ansRow);
 
-                //if (userAnswers != null && userAnswers.Count == 11)
-                //{
-                //    SRespondentDAO.InsertSurvey(ans);
-                //}
+                SRespondentDAO.InsertSurvey(ans);
             }
 
-            List<SAnswer> userAnsweredQuestions = (List<SAnswer>)Session["Answers"];
-
-            //if (userAnsweredQuestions != null && userAnsweredQuestions.Count > 12)
-            //{
-                foreach (SAnswer answer in userAnsweredQuestions)
-                {
-                    SRespondentDAO.InsertSurvey(answer);
-                }
-            //}
 
             SQuestion question = SQuestionDAO.GetQuestionById(12);
             List<SQuestionOptions> questionOptions = SQuestionDAO.GetQuestionOptionsById(12);

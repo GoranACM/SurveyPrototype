@@ -84,7 +84,9 @@ namespace SurveyPrototype.SurveyDBUtilities
         /// Method for Inserting a Respondent session in the DB
         /// </summary>
         /// <param name="sessionID"></param>
+        /// <param name="rID"></param>
         /// <returns></returns>
+        //public static int InsertSession(string sessionID, int rID)
         public static int InsertSession(string sessionID)
         {
             try
@@ -93,8 +95,10 @@ namespace SurveyPrototype.SurveyDBUtilities
                 using (SqlConnection con = new SqlConnection(cn))
                 {
                     SqlCommand cmd = new SqlCommand("INSERT INTO SSession (sSessionID) OUTPUT INSERTED.sID VALUES (@sSessionID)", con);
+                    //SqlCommand cmd = new SqlCommand("INSERT INTO SSession (sSessionID, sRespondentID) OUTPUT INSERTED.sID VALUES (@sSessionID, @sRespondentID)", con);
 
                     cmd.Parameters.AddWithValue("@sSessionID", sessionID);
+                    //cmd.Parameters.AddWithValue("@sRespondentID", rID);
 
                     con.Open();
 

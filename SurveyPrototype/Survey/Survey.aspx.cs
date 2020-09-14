@@ -58,7 +58,7 @@ namespace SurveyPrototype.SurveyPages
                         // Insert the respondent in the DB
                         SRespondentDAO.InsertRespondent(respondent);
                         // Save IP to a Session
-                        Session["User"] = userIP;
+                        Session["User"] = userIP;                       
                     }
                 }
                
