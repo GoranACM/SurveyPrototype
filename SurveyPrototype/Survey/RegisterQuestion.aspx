@@ -6,7 +6,7 @@
 <head runat="server">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
     <link rel="SHORTCUT ICON" href="~/SurveyImages/favicon.ico"/>
-    <link href="~/SurveyStyles/SurveyQuestionCSS.css" rel="stylesheet" />
+    <link href="~/SurveyStyles/RegisterQuestionCSS.css" rel="stylesheet" />
     <title>AITR Survey Register</title>
 </head>
 <body>
@@ -34,19 +34,35 @@
             <div class="center">
                 <asp:Table ID="UserAnswerTable" runat="server">
                 <asp:TableHeaderRow>
-                    <asp:TableCell Font-Bold="true">Question ID</asp:TableCell>
+                    <asp:TableCell Font-Bold="true">Question</asp:TableCell>
                     <asp:TableCell Font-Bold="true">Answer</asp:TableCell>
                 </asp:TableHeaderRow>
+                <asp:TableRow>
+                    <asp:TableCell Font-Bold="true" ForeColor="#5dbcd2">__________________________________________</asp:TableCell>
+                    <asp:TableCell Font-Bold="true" ForeColor="#5dbcd2">________________________</asp:TableCell>
+                </asp:TableRow>
             </asp:Table>
             </div>            
         </div>
         <div>    
-            <asp:Label ID="QuestionLabel" runat="server" Text="Label"></asp:Label>
             <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal" CssClass="radio-toolbar">
                 <asp:ListItem Text=""></asp:ListItem>
                 <asp:ListItem Text=""></asp:ListItem>
             </asp:RadioButtonList>
         </div>
+        <div class="container">            
+            <div class="center">
+                <h3>Do you want to register as a member?</h3>
+            </div>
+        </div>
+        <div class="buttonContainer">
+            <div style="margin-top: 30px; margin-left: 80px;">
+                 <asp:Button ID="registerBtn" runat="server" Text="Yes" CssClass="button" OnClick="registerBtn_Click"  />
+            </div>
+            <div style="margin-top: 30px; margin-left: 80px;">
+                 <asp:Button ID="exitBtn" runat="server" Text="No" CssClass="buttonReg" OnClick="exitBtn_Click"  />
+            </div>
+        </div>            
     </form>
 </body>
 </html>

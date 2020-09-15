@@ -73,7 +73,7 @@
                     </asp:TableRow>
                     <asp:TableRow>
                         <asp:TableCell ColumnSpan="3">
-                            <asp:Button ID="loginBtn" runat="server" Text="Login" style="background-color: #5dbcd2; color: white" CssClass="button"/>
+                            <asp:Button ID="loginBtn" runat="server" Text="Login" style="background-color: #5dbcd2; color: white" CssClass="button" OnClick="loginBtn_Click"/>
                         </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>

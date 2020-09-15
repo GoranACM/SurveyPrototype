@@ -9,11 +9,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SurveyPrototype.SurveyPages
 {
@@ -24,11 +20,24 @@ namespace SurveyPrototype.SurveyPages
             
         }
 
+        /// <summary>
+        /// Button click to start the survey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void surveyStartButton_Click(object sender, ImageClickEventArgs e)
         {
-            // TODO: Check why I cannot move without validation of login buttons
             Response.Redirect("~/Survey/Survey.aspx", true);         
         }
 
+        /// <summary>
+        /// Button click to log in as a Staff member
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void loginBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Survey/Staff.aspx", true);
+        }
     }
 }

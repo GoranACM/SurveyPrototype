@@ -13,7 +13,6 @@ using SurveyPrototype.SurveyEntities;
 using SurveyPrototype.SurveyUtilities;
 using System;
 using System.Collections.Generic;
-using System.Web;
 using System.Web.UI.WebControls;
 
 namespace SurveyPrototype.SurveyPages
@@ -55,17 +54,18 @@ namespace SurveyPrototype.SurveyPages
                         respondent.rIpAddress = userIP;
                         // Save the current date
                         respondent.rDateStamp = DateTime.Now;
-                        // Insert the respondent in the DB
-                        SRespondentDAO.InsertRespondent(respondent);
+                        
                         // Save IP to a Session
-                        Session["User"] = userIP;                       
+                        Session["User"] = userIP;
+                        // Save Respondent to a Session
+                        Session["UserRespondent"] = respondent;
                     }
                 }
                
             }
             catch (Exception)
             {
-
+                Response.Redirect("~/ErrorPages/ErrorPage.aspx");
                 throw;
             }
 
@@ -88,7 +88,7 @@ namespace SurveyPrototype.SurveyPages
                         txtBox.Attributes["questionID"] = question.qID.ToString(); // Convert to string and pass to Next button
                         txtBox.ID = "TextQuestion"; // Give it an ID
                         QuestionPlaceholder.Controls.Add(txtBox); // Add to placeholder
-                        Session["CurrentQuestionID"] = question.nQuestion + 1; // Save to a session to use on Next button
+                        Session["CurrentQuestionID"] = question.qID; // Save to a session to use on Next button
                     }
                     else if ("radio".Equals(question.qType))
                     {                       
@@ -103,7 +103,7 @@ namespace SurveyPrototype.SurveyPages
 
                         QuestionPlaceholder.Controls.Add(radioButtonList); // Add to placeholder
 
-                        Session["CurrentQuestionID"] = question.nQuestion + 1; // Save to a session to use on Next button
+                        Session["CurrentQuestionID"] = question.qID; // Save to a session to use on Next button
 
                     }
                     else if ("checkbox".Equals(question.qType))
@@ -119,7 +119,7 @@ namespace SurveyPrototype.SurveyPages
 
                         QuestionPlaceholder.Controls.Add(checkBoxList); // Add to placeholder
 
-                        Session["CurrentQuestionID"] = question.nQuestion + 1; // Save to a session to use on Next button
+                        Session["CurrentQuestionID"] = question.qID; // Save to a session to use on Next button
                     }
                     else if ("dropdown".Equals(question.qType))
                     {
@@ -134,7 +134,7 @@ namespace SurveyPrototype.SurveyPages
 
                         QuestionPlaceholder.Controls.Add(dropDownList); // Add to placeholder
 
-                        Session["CurrentQuestionID"] = question.nQuestion + 1; // Save to a session to use on Next button
+                        Session["CurrentQuestionID"] = question.qID; // Save to a session to use on Next button
                     }
                 }
             }
@@ -146,6 +146,11 @@ namespace SurveyPrototype.SurveyPages
 
         }
 
+        /// <summary>
+        /// Button click for moving forward in the Survey questions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void nextBtn_Click(object sender, EventArgs e)
         {
             try

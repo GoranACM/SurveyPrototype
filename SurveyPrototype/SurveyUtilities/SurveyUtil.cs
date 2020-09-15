@@ -20,8 +20,7 @@ namespace SurveyPrototype.SurveyUtilities
         /// <returns>IP Address as a string</returns>
         public static string getUserIP()
         {
-            //get IP through PROXY
-            //====================
+            // Get IP through PROXY
             HttpContext context = HttpContext.Current;
             string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
 
@@ -35,8 +34,7 @@ namespace SurveyPrototype.SurveyUtilities
                 }
             }
             
-            //ACROSS WEB HTTP REQUEST
-            //=======================
+            // Get IP with WEB HTTP REQUEST
             ipAddress = context.Request.UserHostAddress;
 
             if (ipAddress.Trim() == "::1")

@@ -71,6 +71,8 @@
     <Content Include="SurveyImages\aitr.png" />
     <Content Include="SurveyImages\arrow.png" />
     <Content Include="SurveyImages\favicon.ico" />
+    <Content Include="SurveyStyles\StaffCSS.css" />
+    <Content Include="SurveyStyles\RegisterQuestionCSS.css" />
     <Content Include="SurveyUserControl\CheckboxQuestionControl.ascx" />
     <Content Include="SurveyUserControl\DropdownQuestionControl.ascx" />
     <Content Include="SurveyUserControl\RadioQuestionControl.ascx" />

@@ -23,34 +23,28 @@ namespace SurveyPrototype.Survey
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+
+        }
+
+        protected void registerBtn_Click(object sender, EventArgs e)
+        {
             //try
             //{
-            //    List<SAnsweredQuestions> userAnswers = (List<SAnsweredQuestions>)Session["Answers"];
-
-            //    // Check if all survey answers are there and if the survey is complete
-            //    if (userAnswers.Count > 12)
-            //    {
-            //        foreach (SAnsweredQuestions answer in userAnswers)
-            //        {
-            //            SRespondentDAO.InsertSurvey(answer);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        // TODO: You need to complete the questions in order to save the responses to DB
-            //    }
+            //    // Get the respondent from the Session
+            //    SRespondent respondent = (SRespondent)Session["UserRespondent"];
+                
+            //    respondent.rFirstName = FirstNameBox.Text;
+            //    respondent.rLastName = LastNameBox.Text;
+            //    respondent.rDateOfBirth = DOBBox.Text; // TODO: Convert to date time
+            //    respondent.rPhoneNumber = PhoneNumberBox.Text;
+            //    respondent.rIpAddress = respondent.rIpAddress;
             //}
             //catch (Exception)
             //{
             //    Response.Redirect("~/ErrorPages/ErrorPage.aspx");
             //    throw;
             //}
-                        
-        }
-
-        protected void registerBtn_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

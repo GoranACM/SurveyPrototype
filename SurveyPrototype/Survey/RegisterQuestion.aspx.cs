@@ -11,6 +11,7 @@
 using SurveyPrototype.SurveyEntities;
 using SurveyPrototype.SurveyDBUtilities;
 using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,54 +24,35 @@ namespace SurveyPrototype.Survey
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            int rID = SRespondentDAO.InsertSession(sessionID: Session.SessionID);
-            //int rID = SRespondentDAO.InsertSession(Session.SessionID, (int)Session["UserID"]);
-
-            List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"];
-                       
-            foreach (SAnswer ans in userAnswers)
-            {
-                TableRow ansRow = new TableRow();
-                ans.rID = rID;
-
-                TableCell questionIDCell = new TableCell();
-                questionIDCell.Text = ans.aID.ToString();
-
-                TableCell answerCell = new TableCell();
-                answerCell.Text = ans.aText.ToString();
-
-                ansRow.Cells.Add(questionIDCell);
-                ansRow.Cells.Add(answerCell);
-
-                UserAnswerTable.Rows.Add(ansRow);
-
-                SRespondentDAO.InsertSurvey(ans);
-            }
-
-
-            SQuestion question = SQuestionDAO.GetQuestionById(12);
-            List<SQuestionOptions> questionOptions = SQuestionDAO.GetQuestionOptionsById(12);
-
             try
             {
-                if (null != question && null != questionOptions)
+                int rID = SRespondentDAO.InsertSession(sessionID: Session.SessionID); // Get the session ID for the current User
+
+                List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"]; // Get the answers from the session
+
+                // Loop through the answers
+                foreach (SAnswer ans in userAnswers)
                 {
-                    // Passing the text from the question entity to the label
-                    // outside of the question Options
-                    QuestionLabel.Text = question.qText;
+                    SQuestion question1 = SQuestionDAO.GetQuestionById(ans.qID); // Get the question
 
-                    // TODO: Check why the radio buttons do not show up
-                    RadioButtonList radioButtonList = new RadioButtonList(); // User controled box goes here
-                    radioButtonList.Attributes["questionID"] = question.qID.ToString(); // Convert to string and pass to Next button
-                    radioButtonList.ID = "RadioQuestion"; // Give it an ID
+                    // Create and populate table with the questions and answers of the user
+                    TableRow ansRow = new TableRow();
+                    ans.rID = rID;
 
-                    foreach (SQuestionOptions option in questionOptions) // Iterate through options
-                    {
-                        radioButtonList.Items.Add(new ListItem(option.qOptionText)); // Add each option to list
-                    }
+                    TableCell questionTextCell = new TableCell();
+                    questionTextCell.Text = question1.qText.ToString();
 
-                    RadioButtonList1.Controls.Add(radioButtonList); // Add to placeholder
+                    TableCell answerCell = new TableCell();
+                    answerCell.Text = ans.aText.ToString();
+
+                    ansRow.Cells.Add(questionTextCell);
+                    ansRow.Cells.Add(answerCell);
+
+                    // Add each answer and question to the table
+                    UserAnswerTable.Rows.Add(ansRow);
+
+                    // Insert each answer to the DB
+                    SRespondentDAO.InsertSurvey(ans);
                 }
             }
             catch (Exception)
@@ -80,6 +62,36 @@ namespace SurveyPrototype.Survey
             }
         }
 
+        protected void exitBtn_Click(object sender, EventArgs e)
+        {
+            
+            SaveAnonimous();
+            // Close the application
+            Environment.Exit(1);
+        }
 
+        protected void registerBtn_Click(object sender, EventArgs e)
+        {
+
+            SaveAnonimous();
+            // Redirect user to the register page
+            Response.Redirect("~/Survey/Register.aspx");
+        }
+
+        private void SaveAnonimous()
+        {
+            try
+            {
+                // Get the respondent from the session
+                SRespondent respondent = (SRespondent)Session["UserRespondent"];
+                // Insert the respondent in the DB as Anonymous
+                SRespondentDAO.InsertRespondent(respondent);
+            }
+            catch (Exception)
+            {
+                Response.Redirect("~/ErrorPages/ErrorPage.aspx");
+                throw;
+            }
+        }
     }
 }
