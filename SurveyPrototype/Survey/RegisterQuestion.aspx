@@ -56,11 +56,8 @@
             </div>
         </div>
         <div class="buttonContainer">
-            <div style="margin-top: 30px; margin-left: 80px;">
+            <div style="margin-top: 30px; margin-left: 150px;">
                  <asp:Button ID="registerBtn" runat="server" Text="Yes" CssClass="button" OnClick="registerBtn_Click"  />
-            </div>
-            <div style="margin-top: 30px; margin-left: 80px;">
-                 <asp:Button ID="exitBtn" runat="server" Text="No" CssClass="buttonReg" OnClick="exitBtn_Click"  />
             </div>
         </div>            
     </form>

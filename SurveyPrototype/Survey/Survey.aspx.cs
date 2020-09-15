@@ -58,7 +58,9 @@ namespace SurveyPrototype.SurveyPages
                         // Save IP to a Session
                         Session["User"] = userIP;
                         // Save Respondent to a Session
-                        Session["UserRespondent"] = respondent;
+
+                        SRespondentDAO.InsertRespondent(respondent);
+                        //Session["UserRespondent"] = respondent;
                     }
                 }
                
@@ -233,12 +235,27 @@ namespace SurveyPrototype.SurveyPages
 
                     if (checkButton.SelectedValue != null)
                     {
+                        //SAnswer userAnswer = new SAnswer();
+
+                        //userAnswer.aText = checkButton.SelectedItem.Text;
+                        //userAnswer.aID = (int)Session["CurrentQuestionID"];
+                        //userAnswer.qID = Int16.Parse(checkButton.Attributes["questionId"]);
+
                         SAnswer userAnswer = new SAnswer();
+                        string selectedItems = "";
 
-                        userAnswer.aText = checkButton.SelectedItem.Text;
+                        foreach (ListItem checkedItem in checkButton.Items)
+                        {
+                            if (checkedItem.Selected)
+                            {
+                                selectedItems += checkedItem.Text + ", ";
+                            }
+                            userAnswer.qID = Int16.Parse(checkButton.Attributes["questionId"]);
+                        }
+
+                        selectedItems = selectedItems.TrimEnd(new char[] { ',' });
+                        userAnswer.aText = selectedItems;
                         userAnswer.aID = (int)Session["CurrentQuestionID"];
-                        userAnswer.qID = Int16.Parse(checkButton.Attributes["questionId"]);
-
 
                         // Storing answers in a Session, make a method to call for each different type of question
                         if (Session["Answers"] != null)
