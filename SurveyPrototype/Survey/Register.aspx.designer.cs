@@ -123,6 +123,15 @@ namespace SurveyPrototype.Survey
         protected global::System.Web.UI.WebControls.RequiredFieldValidator dobValidator1;
 
         /// <summary>
+        /// calendarButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton calendarButton;
+
+        /// <summary>
         /// DOBCalendar control.
         /// </summary>
         /// <remarks>
@@ -159,12 +168,12 @@ namespace SurveyPrototype.Survey
         protected global::System.Web.UI.WebControls.RequiredFieldValidator phoneNumberValidator;
 
         /// <summary>
-        /// registerBtn control.
+        /// registerSurveyBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button registerBtn;
+        protected global::System.Web.UI.WebControls.Button registerSurveyBtn;
     }
 }

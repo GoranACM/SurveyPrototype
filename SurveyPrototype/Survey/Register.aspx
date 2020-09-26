@@ -61,7 +61,8 @@
                             <br />
                             <asp:TextBox ID="DOBBox" runat="server" Placeholder="Select your DOB below..." Height="30px" Width="257px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px"></asp:TextBox>    
                             <asp:RequiredFieldValidator ID="dobValidator1" runat="server" ErrorMessage="Date of birth Required" ControlToValidate="DOBBox" CssClass="validator"></asp:RequiredFieldValidator>
-                            <asp:Calendar ID="DOBCalendar" runat="server"></asp:Calendar>
+                            <asp:ImageButton ID="calendarButton" runat="server" ImageUrl="~/SurveyImages/icons-calendar.png" OnClick="calendarButton_Click" />
+                            <asp:Calendar ID="DOBCalendar" runat="server" OnSelectionChanged="DOBCalendar_SelectionChanged"></asp:Calendar>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
@@ -80,7 +81,7 @@
                     <asp:TableRow>
                         <asp:TableCell>
                             <div style="margin-top: 30px; margin-left: 80px;">
-                                <asp:Button ID="registerBtn" runat="server" Text="Register" CssClass="button" OnClick="registerBtn_Click"  />
+                                <asp:Button ID="registerSurveyBtn" runat="server" Text="Register" CssClass="button" OnClick="registerSurveyBtn_Click"  />
                             </div>                            
                         </asp:TableCell>
                     </asp:TableRow>                        

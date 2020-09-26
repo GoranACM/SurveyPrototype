@@ -54,13 +54,17 @@ namespace SurveyPrototype.SurveyPages
                         respondent.rIpAddress = userIP;
                         // Save the current date
                         respondent.rDateStamp = DateTime.Now;
+
                         
                         // Save IP to a Session
                         Session["User"] = userIP;
                         // Save Respondent to a Session
 
+                        
                         SRespondentDAO.InsertRespondent(respondent);
-                        //Session["UserRespondent"] = respondent;
+                        Session["UserRespondent"] = respondent;
+
+                        Session["UserID"] = respondent.rID;                         
                     }
                 }
                

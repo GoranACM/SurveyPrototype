@@ -71,6 +71,7 @@
     <Content Include="SurveyImages\aitr.png" />
     <Content Include="SurveyImages\arrow.png" />
     <Content Include="SurveyImages\favicon.ico" />
+    <Content Include="SurveyImages\icons-calendar.png" />
     <Content Include="SurveyStyles\StaffCSS.css" />
     <Content Include="SurveyStyles\RegisterQuestionCSS.css" />
     <Content Include="SurveyUserControl\CheckboxQuestionControl.ascx" />

@@ -29,7 +29,7 @@ namespace SurveyPrototype.SurveyDBUtilities
                 using (SqlConnection con = new SqlConnection(cn))
                 {
                     
-                    SqlCommand cmd = new SqlCommand("INSERT INTO SRespondent (sRFirstName, sRIpAddress, sRDateStamp) VALUES (@sRFirstName, @sRIpAddress, @sRDateStamp)", con);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO SRespondent (sRFirstName, sRIpAddress, sRDateStamp) VALUES (@sRFirstName, @sRIpAddress, @sRDateStamp) SELECT CAST(scope_identity() AS int)", con);
 
                     //cmd.Parameters.AddWithValue("@sRespondentID", respondent.rID);
                     cmd.Parameters.AddWithValue("@sRFirstName", respondent.rFirstName);
@@ -57,13 +57,14 @@ namespace SurveyPrototype.SurveyDBUtilities
         public static void UpdateRespondent(SRespondent respondent)
         {
             try
-            {
+            {                
                 string cn = ConfigurationManager.ConnectionStrings["SurveyDatabase"].ToString();
                 using (SqlConnection con = new SqlConnection(cn))
                 {
-                    SqlCommand cmd = new SqlCommand("UPDATE SRespondent SET sRFirstName=@sRFirstName, sRLastName=@sRLastName, sRDateOfBirth=@sRDateOfBirth, sRPhoneNumber=@sRPhoneNumber WHERE sRespondentID=@sRespondentID)", con);
+                    SqlCommand cmd = new SqlCommand("UPDATE SRespondent SET sRFirstName=@sRFirstName, " +
+                        "sRLastName=@sRLastName, sRDateOfBirth=@sRDateOfBirth, sRPhoneNumber=@sRPhoneNumber WHERE sRespondentID=@sRespondentID)", con);
 
-                    //cmd.Parameters.AddWithValue("@sRespondentID", respondent.rID);
+                    cmd.Parameters.AddWithValue("@sRespondentID", respondent.rID);                   
                     cmd.Parameters.AddWithValue("@sRFirstName", respondent.rFirstName);
                     cmd.Parameters.AddWithValue("@sRLastName", respondent.rLastName);
                     cmd.Parameters.AddWithValue("@sRDateOfBirth", respondent.rDateOfBirth);

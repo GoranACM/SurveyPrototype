@@ -27,52 +27,56 @@ namespace SurveyPrototype.Survey
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (!Page.IsPostBack)
             {
-                int rID = SRespondentDAO.InsertSession(Session.SessionID); // Get the session ID for the current User
-
-                List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"]; // Get the answers from the session
-
-                // Loop through the answers
-                foreach (SAnswer ans in userAnswers)
+                try
                 {
-                    SQuestion question = SQuestionDAO.GetQuestionById(ans.qID); // Get the question
+                    int rID = SRespondentDAO.InsertSession(Session.SessionID); // Get the session ID for the current User
 
-                    // Create and populate table with the questions and answers of the user
-                    TableRow ansRow = new TableRow();
-                    ans.rID = rID;
+                    List<SAnswer> userAnswers = (List<SAnswer>)Session["Answers"]; // Get the answers from the session
 
-                    TableCell questionTextCell = new TableCell();
-                    questionTextCell.Text = question.qText.ToString();
+                    // Loop through the answers
+                    foreach (SAnswer ans in userAnswers)
+                    {
+                        SQuestion question = SQuestionDAO.GetQuestionById(ans.qID); // Get the question
 
-                    TableCell answerCell = new TableCell();
-                    answerCell.Text = ans.aText.ToString();
+                        // Create and populate table with the questions and answers of the user
+                        TableRow ansRow = new TableRow();
+                        ans.rID = rID;
 
-                    ansRow.Cells.Add(questionTextCell);
-                    ansRow.Cells.Add(answerCell);
+                        TableCell questionTextCell = new TableCell();
+                        questionTextCell.Text = question.qText.ToString();
 
-                    // Add each answer and question to the table
-                    UserAnswerTable.Rows.Add(ansRow);
+                        TableCell answerCell = new TableCell();
+                        answerCell.Text = ans.aText.ToString();
 
-                    SRespondentDAO.InsertSurvey(ans);
+                        ansRow.Cells.Add(questionTextCell);
+                        ansRow.Cells.Add(answerCell);
+
+                        // Add each answer and question to the table
+                        UserAnswerTable.Rows.Add(ansRow);
+
+                        SRespondentDAO.InsertSurvey(ans);
+                    }
+
                 }
-                 
+                catch (Exception)
+                {
+                    //Response.Redirect("~/ErrorPages/ErrorPage.aspx");
+                    throw;
+                }
             }
-            catch (Exception)
-            {
-                Response.Redirect("~/ErrorPages/ErrorPage.aspx");
-                throw;
-            }
+            
         }
 
 
         protected void registerBtn_Click(object sender, EventArgs e)
         {
 
-            //SaveAnonimous();
-            //InsertSurvey();
+            // SaveAnonimous();
+            // InsertSurvey();
             // Redirect user to the register page
-            Session.Abandon();
+            // Session.Abandon();
             Response.Redirect("~/Survey/Register.aspx");
         }
 
