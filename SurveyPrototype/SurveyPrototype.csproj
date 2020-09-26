@@ -85,6 +85,7 @@
     <Content Include="SurveyPages\SurveyHome.aspx" />
     <Content Include="SurveyStyles\SurveyMainCSS.css" />
     <Content Include="SurveyStyles\SurveyQuestionCSS.css" />
+    <Content Include="Survey\SurveyEnd.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +99,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SurveyDBUtilities\SQuestionDAO.cs" />
     <Compile Include="SurveyDBUtilities\SRespondentDAO.cs" />
+    <Compile Include="SurveyDBUtilities\SStaffDAO.cs" />
     <Compile Include="SurveyDBUtilities\SurveyDBConnector.cs" />
     <Compile Include="SurveyEntities\AITRStaff.cs" />
     <Compile Include="SurveyEntities\SAnswer.cs" />
@@ -168,6 +170,13 @@
     </Compile>
     <Compile Include="SurveyPages\SurveyHome.aspx.designer.cs">
       <DependentUpon>SurveyHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Survey\SurveyEnd.aspx.cs">
+      <DependentUpon>SurveyEnd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Survey\SurveyEnd.aspx.designer.cs">
+      <DependentUpon>SurveyEnd.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

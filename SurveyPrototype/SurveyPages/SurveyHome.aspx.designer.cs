@@ -123,6 +123,15 @@ namespace SurveyPrototype.SurveyPages
         protected global::System.Web.UI.WebControls.RequiredFieldValidator passwordValidator;
 
         /// <summary>
+        /// invalidLoginLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label invalidLoginLabel;
+
+        /// <summary>
         /// loginBtn control.
         /// </summary>
         /// <remarks>

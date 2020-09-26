@@ -21,12 +21,14 @@
                 />
             </div>
             <div>
-                <h1>AITResearch Survey</h1>
-            </div>            
+                <h1>AITResearch Survey</h1>                
+            </div>  
+            
         </div>
     </header>
     <form id="form1" runat="server" class="grid">
         <div class="containerForm">
+           <div><asp:Button ID="logOut" runat="server" Text="Logout" OnClick="logOut_Click" CssClass="button" /></div>
            <asp:Label ID="Label2" runat="server" Text="Select filters" Font-Size="25px"></asp:Label>
             <div class="filters">
                 <asp:Label ID="Label1" runat="server" Text="General" Font-Size="15px" CssClass="labels"></asp:Label>
@@ -128,18 +130,15 @@
                 <div class="filterItem">
                     <asp:TextBox ID="AnswerBox" runat="server" Placeholder="Search here..." Height="30px" Width="270px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px"></asp:TextBox>                
                 </div>
-                <div class="filterItem">
-                    <asp:RequiredFieldValidator ID="answerValidator" runat="server" ErrorMessage="Answer Required" ControlToValidate="AnswerBox" CssClass="validator"></asp:RequiredFieldValidator>
-                </div>
             
                <div class="filterItem">
-                    <asp:Button ID="nextBtn" runat="server" Text="Search" style="background-color: #5dbcd2; color: white" CssClass="button"/>
+                    <asp:Button ID="searchBtn" runat="server" Text="Search" style="background-color: #5dbcd2; color: white" CssClass="button"/>
                 </div>         
             </div>
 
             <div class="container">
                 <div class="grid">
-                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" DataKeyNames="sRespondentID" DataSourceID="SqlDataSource3" GridLines="None">
+                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" DataKeyNames="sRespondentID" DataSourceID="SqlDataSource3" GridLines="None" AllowPaging="True" PageSize="10">
                         <Columns>
                             <asp:BoundField DataField="sRespondentID" HeaderText="sRespondentID" InsertVisible="False" ReadOnly="True" SortExpression="sRespondentID" />
                             <asp:BoundField DataField="sRFirstName" HeaderText="sRFirstName" SortExpression="sRFirstName" />

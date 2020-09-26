@@ -8,7 +8,9 @@
  *  Subject: Data-Driven Apps
  */
 
+using SurveyPrototype.SurveyDBUtilities;
 using System;
+using System.Web.Security;
 using System.Web.UI;
 
 namespace SurveyPrototype.SurveyPages
@@ -17,7 +19,7 @@ namespace SurveyPrototype.SurveyPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            invalidLoginLabel.Visible = false;
         }
 
         /// <summary>
@@ -37,7 +39,16 @@ namespace SurveyPrototype.SurveyPages
         /// <param name="e"></param>
         protected void loginBtn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Survey/Staff.aspx", true);
+            if (SStaffDAO.ValidateUser(UserNameBox.Text, PasswordBox.Text))
+            {
+                FormsAuthentication.RedirectFromLoginPage(UserNameBox.Text, false);
+                
+            }
+            else
+            {
+                invalidLoginLabel.Visible = true;
+            }
+            //Response.Redirect("~/Survey/Staff.aspx", true);
         }
     }
 }

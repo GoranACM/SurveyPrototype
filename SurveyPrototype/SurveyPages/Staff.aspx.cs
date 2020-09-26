@@ -9,6 +9,7 @@
  */
 
 using System;
+using System.Web.Security;
 
 namespace SurveyPrototype.SurveyPages
 {
@@ -17,6 +18,12 @@ namespace SurveyPrototype.SurveyPages
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void logOut_Click(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            FormsAuthentication.RedirectToLoginPage();
         }
     }
 }

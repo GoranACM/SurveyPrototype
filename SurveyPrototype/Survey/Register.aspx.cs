@@ -13,6 +13,7 @@ using SurveyPrototype.SurveyEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -24,9 +25,7 @@ namespace SurveyPrototype.Survey
         protected void Page_Load(object sender, EventArgs e)
         {
             DOBBox.Enabled = false;
-            //DOBCalendar.Visible = false;
 
-            Console.WriteLine(Session["UserRespondent"]);
             if (!IsPostBack)
             {
                 
@@ -37,28 +36,39 @@ namespace SurveyPrototype.Survey
         protected void registerSurveyBtn_Click(object sender, EventArgs e)
         {
            // if (!IsPostBack)
-          //  {
+           // {
                 
                 try
                 {
-                    // Get the respondent from the Session
+                    int respondentID = (int)Session["UserID"];
+
                     SRespondent respondent = new SRespondent();
-                    
-                    respondent.rID = (int)Session["UserID"];
-                    respondent.rFirstName = FirstNameBox.Text;
+
+                    respondent.rID = respondentID;
+                    //if (Regex.IsMatch(FirstNameBox.Text, @"^[a-zA-Z]+$"))
+                    //{
+                        respondent.rFirstName = FirstNameBox.Text;
+                    //}
+                    //else
+                    //{
+                        //firstNameValidator.Text = "Invalid name";
+                    //}
+                
                     respondent.rLastName = LastNameBox.Text;
                     respondent.rDateOfBirth = DateTime.Parse(DOBBox.Text); // TODO: Convert to date time
                     respondent.rPhoneNumber = PhoneNumberBox.Text;
-                    //respondent.rIpAddress = respondent.rIpAddress;
+                    respondent.rComplete = 1;
 
                     SRespondentDAO.UpdateRespondent(respondent);
+
+                    Response.Redirect("~/Survey/SurveyEnd.aspx");
                 }
                 catch (Exception)
                 {
                     //Response.Redirect("~/ErrorPages/ErrorPage.aspx");
                     throw;
                 }
-          //  }
+           // }
             
         }
 
@@ -76,5 +86,6 @@ namespace SurveyPrototype.Survey
             DOBBox.Text = DOBCalendar.SelectedDate.ToShortDateString();
             DOBCalendar.Visible = false;
         }
+        
     }
 }

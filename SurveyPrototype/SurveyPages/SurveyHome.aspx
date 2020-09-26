@@ -69,6 +69,8 @@
                             <asp:TextBox ID="PasswordBox" runat="server" Placeholder="Enter password here..." TextMode="Password" Height="30px" Width="170px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px"></asp:TextBox>
                             <br />
                             <asp:RequiredFieldValidator ID="passwordValidator" runat="server" ErrorMessage="Password required" ControlToValidate="PasswordBox" CssClass="validator"></asp:RequiredFieldValidator>
+                            <br />
+                            <asp:Label ID="invalidLoginLabel" runat="server" Text="Invalid Username or Password" CssClass="validator"></asp:Label>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>

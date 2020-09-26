@@ -75,9 +75,16 @@
                             <asp:Label ID="PhoneNumber" runat="server" Text="What is your contact number?" Font-Size="25px"></asp:Label>
                             <br />
                             <asp:TextBox ID="PhoneNumberBox" runat="server" Placeholder="Enter your number here..." Height="30px" Width="257px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="phoneNumberValidator" runat="server" ErrorMessage="Last name Required" ControlToValidate="PhoneNumberBox" CssClass="validator"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ID="phoneNumberValidator" runat="server" ErrorMessage="Phone number Required" ControlToValidate="PhoneNumberBox" CssClass="validator"></asp:RequiredFieldValidator>
                         </asp:TableCell>
                     </asp:TableRow>
+                    <asp:TableRow>
+                        <asp:TableCell>
+                            <div style="margin-top: 30px; margin-left: 80px;">
+                                <asp:Label ID="fieldWarningLabel" runat="server" Text="Label" CssClass="validator"></asp:Label>
+                            </div>                            
+                        </asp:TableCell>
+                    </asp:TableRow>      
                     <asp:TableRow>
                         <asp:TableCell>
                             <div style="margin-top: 30px; margin-left: 80px;">

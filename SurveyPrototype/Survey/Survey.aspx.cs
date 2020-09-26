@@ -54,24 +54,26 @@ namespace SurveyPrototype.SurveyPages
                         respondent.rIpAddress = userIP;
                         // Save the current date
                         respondent.rDateStamp = DateTime.Now;
+                        // Save as incomplete respondent
+                        respondent.rComplete = 0;
 
-                        
+
                         // Save IP to a Session
                         Session["User"] = userIP;
                         // Save Respondent to a Session
 
                         
-                        SRespondentDAO.InsertRespondent(respondent);
+                        int rID = SRespondentDAO.InsertRespondent(respondent);
                         Session["UserRespondent"] = respondent;
 
-                        Session["UserID"] = respondent.rID;                         
+                        Session["UserID"] = rID;                         
                     }
                 }
                
             }
             catch (Exception)
             {
-                Response.Redirect("~/ErrorPages/ErrorPage.aspx");
+                //Response.Redirect("~/ErrorPages/ErrorPage.aspx");
                 throw;
             }
 

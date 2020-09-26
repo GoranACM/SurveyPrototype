@@ -21,7 +21,7 @@ namespace SurveyPrototype.SurveyDBUtilities
         /// Method for Inserting a Respondent in the DB
         /// </summary>
         /// <param name="respondent"></param>
-        public static void InsertRespondent(SRespondent respondent)
+        public static int InsertRespondent(SRespondent respondent)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace SurveyPrototype.SurveyDBUtilities
                 using (SqlConnection con = new SqlConnection(cn))
                 {
                     
-                    SqlCommand cmd = new SqlCommand("INSERT INTO SRespondent (sRFirstName, sRIpAddress, sRDateStamp) VALUES (@sRFirstName, @sRIpAddress, @sRDateStamp) SELECT CAST(scope_identity() AS int)", con);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO SRespondent (sRFirstName, sRIpAddress, sRDateStamp, sRCompleted) OUTPUT INSERTED.sRespondentID VALUES (@sRFirstName, @sRIpAddress, @sRDateStamp, @sRCompleted) SELECT CAST(scope_identity() AS int)", con);
 
                     //cmd.Parameters.AddWithValue("@sRespondentID", respondent.rID);
                     cmd.Parameters.AddWithValue("@sRFirstName", respondent.rFirstName);
@@ -38,8 +38,9 @@ namespace SurveyPrototype.SurveyDBUtilities
                     //cmd.Parameters.AddWithValue("@sRPhoneNumber", respondent.rPhoneNumber);
                     cmd.Parameters.AddWithValue("@sRIpAddress", respondent.rIpAddress);
                     cmd.Parameters.AddWithValue("@sRDateStamp", respondent.rDateStamp);
+                    cmd.Parameters.AddWithValue("@sRCompleted ", respondent.rComplete);
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    return (int)cmd.ExecuteScalar();
                 }
             }
             catch (Exception)
@@ -62,7 +63,7 @@ namespace SurveyPrototype.SurveyDBUtilities
                 using (SqlConnection con = new SqlConnection(cn))
                 {
                     SqlCommand cmd = new SqlCommand("UPDATE SRespondent SET sRFirstName=@sRFirstName, " +
-                        "sRLastName=@sRLastName, sRDateOfBirth=@sRDateOfBirth, sRPhoneNumber=@sRPhoneNumber WHERE sRespondentID=@sRespondentID)", con);
+                        "sRLastName=@sRLastName, sRDateOfBirth=@sRDateOfBirth, sRPhoneNumber=@sRPhoneNumber WHERE sRespondentID=@sRespondentID", con);
 
                     cmd.Parameters.AddWithValue("@sRespondentID", respondent.rID);                   
                     cmd.Parameters.AddWithValue("@sRFirstName", respondent.rFirstName);
@@ -70,7 +71,7 @@ namespace SurveyPrototype.SurveyDBUtilities
                     cmd.Parameters.AddWithValue("@sRDateOfBirth", respondent.rDateOfBirth);
                     cmd.Parameters.AddWithValue("@sRPhoneNumber", respondent.rPhoneNumber);
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteScalar();
                 }
             }
             catch (Exception)

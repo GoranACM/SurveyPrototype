@@ -24,5 +24,6 @@ namespace SurveyPrototype.SurveyEntities
         public string rPhoneNumber { get; set; }
         public string rIpAddress { get; set; }
         public DateTime rDateStamp { get; set; }
+        public int rComplete { get; set; }
     }
 }
