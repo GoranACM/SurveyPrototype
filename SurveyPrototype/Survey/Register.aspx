@@ -35,6 +35,7 @@
                             <br />
                             <asp:TextBox ID="FirstNameBox" runat="server" Placeholder="Enter your name here..." Height="30px" Width="257px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="firstNameValidator" runat="server" ErrorMessage="First name Required" ControlToValidate="FirstNameBox" CssClass="validator"></asp:RequiredFieldValidator>
+                            <br /><asp:Label ID="wrongFirstNameLabel" runat="server" Text="Label" CssClass="validator"></asp:Label>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
@@ -48,6 +49,7 @@
                             <br />
                             <asp:TextBox ID="LastNameBox" runat="server" Placeholder="Enter your last name here..." Height="30px" Width="257px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="lastNameValidator" runat="server" ErrorMessage="Last name Required" ControlToValidate="LastNameBox" CssClass="validator"></asp:RequiredFieldValidator>
+                            <br /><asp:Label ID="wrongLastNameLabel" runat="server" Text="Label" CssClass="validator"></asp:Label>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
@@ -76,15 +78,9 @@
                             <br />
                             <asp:TextBox ID="PhoneNumberBox" runat="server" Placeholder="Enter your number here..." Height="30px" Width="257px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="phoneNumberValidator" runat="server" ErrorMessage="Phone number Required" ControlToValidate="PhoneNumberBox" CssClass="validator"></asp:RequiredFieldValidator>
+                            <br /><asp:Label ID="wrongNumberLabel" runat="server" Text="Label" CssClass="validator"></asp:Label>
                         </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell>
-                            <div style="margin-top: 30px; margin-left: 80px;">
-                                <asp:Label ID="fieldWarningLabel" runat="server" Text="Label" CssClass="validator"></asp:Label>
-                            </div>                            
-                        </asp:TableCell>
-                    </asp:TableRow>      
+                    </asp:TableRow>   
                     <asp:TableRow>
                         <asp:TableCell>
                             <div style="margin-top: 30px; margin-left: 80px;">
@@ -93,9 +89,6 @@
                         </asp:TableCell>
                     </asp:TableRow>                        
                 </asp:Table>
-            </div>
-            <div>
-                
             </div>
         </div>       
     </form>

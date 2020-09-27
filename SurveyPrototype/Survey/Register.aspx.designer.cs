@@ -69,6 +69,15 @@ namespace SurveyPrototype.Survey
         protected global::System.Web.UI.WebControls.RequiredFieldValidator firstNameValidator;
 
         /// <summary>
+        /// wrongFirstNameLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label wrongFirstNameLabel;
+
+        /// <summary>
         /// LastName control.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace SurveyPrototype.Survey
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator lastNameValidator;
+
+        /// <summary>
+        /// wrongLastNameLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label wrongLastNameLabel;
 
         /// <summary>
         /// DOB control.
@@ -168,13 +186,13 @@ namespace SurveyPrototype.Survey
         protected global::System.Web.UI.WebControls.RequiredFieldValidator phoneNumberValidator;
 
         /// <summary>
-        /// fieldWarningLabel control.
+        /// wrongNumberLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label fieldWarningLabel;
+        protected global::System.Web.UI.WebControls.Label wrongNumberLabel;
 
         /// <summary>
         /// registerSurveyBtn control.

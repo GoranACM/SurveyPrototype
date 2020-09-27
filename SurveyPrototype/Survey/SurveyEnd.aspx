@@ -42,7 +42,7 @@
                     <asp:TableCell Font-Bold="true">Answers</asp:TableCell>
                 </asp:TableHeaderRow>
                 <asp:TableRow>
-                    <asp:TableCell Font-Bold="true" ForeColor="#5dbcd2">__________________________________________</asp:TableCell>
+                    <asp:TableCell Font-Bold="true" ForeColor="#5dbcd2">__________________________________</asp:TableCell>
                     <asp:TableCell Font-Bold="true" ForeColor="#5dbcd2">________________________</asp:TableCell>
                 </asp:TableRow>
             </asp:Table>

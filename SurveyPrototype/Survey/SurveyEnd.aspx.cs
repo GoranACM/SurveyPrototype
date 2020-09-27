@@ -1,10 +1,15 @@
-﻿using SurveyPrototype.SurveyDBUtilities;
+﻿/*  
+ *  Project: AITResearch
+ *  
+ *  Developed by: Goran Ilievski
+ *  ID: #7108
+ *  Date: 28/09/2020
+ *  
+ *  Subject: Data-Driven Apps
+ */
+
 using SurveyPrototype.SurveyEntities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace SurveyPrototype.Survey
@@ -15,13 +20,11 @@ namespace SurveyPrototype.Survey
         {
             SRespondent respondent = (SRespondent)Session["UserRespondent"];
 
+            // Check if the user registered or not
             if (!respondent.rFirstName.Equals("Anonymous"))
             {
                 try
                 {
-
-                    //int rID = SRespondentDAO.GetRespondent(respondent); // Get the session ID for the current User
-
                     // Create and populate table with the questions and answers of the registered user
                     // First name
                     TableRow answerRow = new TableRow();
@@ -76,15 +79,24 @@ namespace SurveyPrototype.Survey
                 }
                 catch (Exception)
                 {
-                    //Response.Redirect("~/ErrorPages/ErrorPage.aspx");
+                    Response.Redirect("~/ErrorPages/ErrorPage.aspx");
                     throw;
                 }
             }
             else
             {
-                UserAnswerTable.Visible = false;
-            }
-            
+                try
+                {
+                    // Hide the table with registration info if user clicked No
+                    UserAnswerTable.Visible = false;
+                }
+                catch (Exception)
+                {
+                    Response.Redirect("~/ErrorPages/ErrorPage.aspx");
+                    throw;
+                }
+                
+            }          
         }
     }
 }

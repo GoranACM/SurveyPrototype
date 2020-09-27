@@ -11,12 +11,8 @@
 using SurveyPrototype.SurveyDBUtilities;
 using SurveyPrototype.SurveyEntities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace SurveyPrototype.Survey
 {
@@ -24,56 +20,79 @@ namespace SurveyPrototype.Survey
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Disable box for entry so that the entry is valid from the Calendar picker
             DOBBox.Enabled = false;
 
-            if (!IsPostBack)
-            {
-                
-            }
-
+            // Disable the warning labels
+            wrongFirstNameLabel.Visible = false;
+            wrongLastNameLabel.Visible = false;
+            wrongNumberLabel.Visible = false;
         }
 
+        /// <summary>
+        /// Button to register the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void registerSurveyBtn_Click(object sender, EventArgs e)
         {
-           // if (!IsPostBack)
-           // {
-                
-            try
+            // Check the 3 fields for wrong input
+            if (IsPhoneNumber(PhoneNumberBox.Text) && IsNameOrLastName(FirstNameBox.Text) && IsNameOrLastName(LastNameBox.Text))
             {
-                int respondentID = (int)Session["UserID"];
+                try
+                {
+                    int respondentID = (int)Session["UserID"];
 
-                SRespondent respondent = new SRespondent();
+                    SRespondent respondent = new SRespondent();
 
-                respondent.rID = respondentID;
-                //if (Regex.IsMatch(FirstNameBox.Text, @"^[a-zA-Z]+$"))
-                //{
+                    respondent.rID = respondentID;
                     respondent.rFirstName = FirstNameBox.Text;
-                //}
-                //else
-                //{
-                    //firstNameValidator.Text = "Invalid name";
-                //}
-                
-                respondent.rLastName = LastNameBox.Text;
-                respondent.rDateOfBirth = DateTime.Parse(DOBBox.Text); // TODO: Convert to date time
-                respondent.rPhoneNumber = PhoneNumberBox.Text;
-                respondent.rComplete = 1;
+                    respondent.rLastName = LastNameBox.Text;
+                    respondent.rDateOfBirth = DateTime.Parse(DOBBox.Text); // TODO: Convert to date time
+                    respondent.rPhoneNumber = PhoneNumberBox.Text;
+                    
+                    // Change respondent to complete
+                    respondent.rComplete = 1;
 
-                SRespondentDAO.UpdateRespondent(respondent);
+                    SRespondentDAO.UpdateRespondent(respondent);
 
-                Session["UserRespondent"] = respondent;
+                    Session["UserRespondent"] = respondent;
 
-                Response.Redirect("~/Survey/SurveyEnd.aspx");
+                    Response.Redirect("~/Survey/SurveyEnd.aspx");
+                }
+                catch (Exception)
+                {
+                    //Response.Redirect("~/ErrorPages/ErrorPage.aspx");
+                    throw;
+                }
             }
-            catch (Exception)
+            else
             {
-                //Response.Redirect("~/ErrorPages/ErrorPage.aspx");
-                throw;
-            }
-        // }
+                if (!IsNameOrLastName(FirstNameBox.Text))
+                {
+                    wrongFirstNameLabel.Text = "Please insert a valid First name";
+                    wrongFirstNameLabel.Visible = true;
+                }
+                else if (!IsNameOrLastName(LastNameBox.Text))
+                {
+                    wrongLastNameLabel.Text = "Please insert a valid Last name";
+                    wrongLastNameLabel.Visible = true;
+                }
+                else if (!IsPhoneNumber(PhoneNumberBox.Text))
+                {
+                    wrongNumberLabel.Text = "Please insert a valid number";
+                    wrongNumberLabel.Visible = true;
+                    //Response.Write("<script>alert('Wrong phone number');</script>");
+                }
+            }           
             
         }
 
+        /// <summary>
+        /// Button to toggle the Calendar visibility
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void calendarButton_Click(object sender, ImageClickEventArgs e)
         {
             DOBCalendar.Visible = !DOBCalendar.Visible;
@@ -83,10 +102,35 @@ namespace SurveyPrototype.Survey
             PhoneNumberBox.CausesValidation = false;
         }
 
+        /// <summary>
+        /// Function to select from the Calendar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void DOBCalendar_SelectionChanged(object sender, EventArgs e)
         {
             DOBBox.Text = DOBCalendar.SelectedDate.ToShortDateString();
             DOBCalendar.Visible = false;
+        }
+
+        /// <summary>
+        /// Validation for First and Last name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>Boolean</returns>
+        public static bool IsNameOrLastName(string name)
+        {
+            return Regex.Match(name, @"^[\p{L} \.\-]+$").Success;
+        }
+
+        /// <summary>
+        /// Validation for Australian numbers only
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns>Boolean</returns>
+        public static bool IsPhoneNumber(string phoneNumber)
+        {
+            return Regex.Match(phoneNumber, @"^([\+]?61[-]?|[0])?[1-9][0-9]{8}$").Success;
         }
         
     }
