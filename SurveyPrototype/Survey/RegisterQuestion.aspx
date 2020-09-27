@@ -59,7 +59,12 @@
             <div style="margin-top: 30px; margin-left: 150px;">
                  <asp:Button ID="registerBtn" runat="server" Text="Yes" CssClass="button" OnClick="registerBtn_Click"  />
             </div>
-        </div>            
+        </div> 
+        <div class="buttonContainer">
+            <div style="margin-top: 30px; margin-left: 150px;">
+                 <asp:Button ID="closeBtn" runat="server" Text="No" CssClass="button" OnClick="closeBtn_Click"  foreColor="Red"/>
+            </div>
+        </div>  
     </form>
 </body>
 </html>

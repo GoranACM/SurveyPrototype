@@ -38,37 +38,39 @@ namespace SurveyPrototype.Survey
            // if (!IsPostBack)
            // {
                 
-                try
-                {
-                    int respondentID = (int)Session["UserID"];
+            try
+            {
+                int respondentID = (int)Session["UserID"];
 
-                    SRespondent respondent = new SRespondent();
+                SRespondent respondent = new SRespondent();
 
-                    respondent.rID = respondentID;
-                    //if (Regex.IsMatch(FirstNameBox.Text, @"^[a-zA-Z]+$"))
-                    //{
-                        respondent.rFirstName = FirstNameBox.Text;
-                    //}
-                    //else
-                    //{
-                        //firstNameValidator.Text = "Invalid name";
-                    //}
+                respondent.rID = respondentID;
+                //if (Regex.IsMatch(FirstNameBox.Text, @"^[a-zA-Z]+$"))
+                //{
+                    respondent.rFirstName = FirstNameBox.Text;
+                //}
+                //else
+                //{
+                    //firstNameValidator.Text = "Invalid name";
+                //}
                 
-                    respondent.rLastName = LastNameBox.Text;
-                    respondent.rDateOfBirth = DateTime.Parse(DOBBox.Text); // TODO: Convert to date time
-                    respondent.rPhoneNumber = PhoneNumberBox.Text;
-                    respondent.rComplete = 1;
+                respondent.rLastName = LastNameBox.Text;
+                respondent.rDateOfBirth = DateTime.Parse(DOBBox.Text); // TODO: Convert to date time
+                respondent.rPhoneNumber = PhoneNumberBox.Text;
+                respondent.rComplete = 1;
 
-                    SRespondentDAO.UpdateRespondent(respondent);
+                SRespondentDAO.UpdateRespondent(respondent);
 
-                    Response.Redirect("~/Survey/SurveyEnd.aspx");
-                }
-                catch (Exception)
-                {
-                    //Response.Redirect("~/ErrorPages/ErrorPage.aspx");
-                    throw;
-                }
-           // }
+                Session["UserRespondent"] = respondent;
+
+                Response.Redirect("~/Survey/SurveyEnd.aspx");
+            }
+            catch (Exception)
+            {
+                //Response.Redirect("~/ErrorPages/ErrorPage.aspx");
+                throw;
+            }
+        // }
             
         }
 

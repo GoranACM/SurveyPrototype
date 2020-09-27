@@ -63,15 +63,53 @@ namespace SurveyPrototype.SurveyDBUtilities
                 using (SqlConnection con = new SqlConnection(cn))
                 {
                     SqlCommand cmd = new SqlCommand("UPDATE SRespondent SET sRFirstName=@sRFirstName, " +
-                        "sRLastName=@sRLastName, sRDateOfBirth=@sRDateOfBirth, sRPhoneNumber=@sRPhoneNumber WHERE sRespondentID=@sRespondentID", con);
+                        "sRLastName=@sRLastName, sRDateOfBirth=@sRDateOfBirth, sRPhoneNumber=@sRPhoneNumber, sRCompleted=@sRCompleted WHERE sRespondentID=@sRespondentID", con);
 
                     cmd.Parameters.AddWithValue("@sRespondentID", respondent.rID);                   
                     cmd.Parameters.AddWithValue("@sRFirstName", respondent.rFirstName);
                     cmd.Parameters.AddWithValue("@sRLastName", respondent.rLastName);
                     cmd.Parameters.AddWithValue("@sRDateOfBirth", respondent.rDateOfBirth);
                     cmd.Parameters.AddWithValue("@sRPhoneNumber", respondent.rPhoneNumber);
+                    cmd.Parameters.AddWithValue("@sRCompleted ", respondent.rComplete);
                     con.Open();
                     cmd.ExecuteScalar();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Method for Updating a Respondent in the DB
+        /// </summary>
+        /// <param name="respondent"></param>
+        public static int GetRespondent(SRespondent respondent)
+        {
+            try
+            {
+                string cn = ConfigurationManager.ConnectionStrings["SurveyDatabase"].ToString();
+                DateTime dt = DateTime.Now;
+                using (SqlConnection con = new SqlConnection(cn))
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT sRFirstName, sRLastName, sRDateOfBirth, sRPhoneNumber, sRDateStamp OUTPUT INSERTED.sRespondentID FROM SRespondent WHERE sRespondentID=@sRespondentID", con);
+
+                    //string time = "";
+                    //DateTime DOB = DateTime.Parse(time);
+
+                    //respondent.rDateOfBirth = DOB.ToString("yyyy-MM-dd HH:mm:ss");
+
+                    cmd.Parameters.AddWithValue("@sRFirstName", respondent.rFirstName);
+                    cmd.Parameters.AddWithValue("@sRLastName", respondent.rLastName);
+                    cmd.Parameters.AddWithValue("@sRDateOfBirth", dt);
+                    cmd.Parameters.AddWithValue("@sRPhoneNumber", respondent.rPhoneNumber);
+                    cmd.Parameters.AddWithValue("@sRDateStamp", respondent.rDateStamp);
+
+                    con.Open();
+                    return (int)cmd.ExecuteScalar();
                 }
             }
             catch (Exception)

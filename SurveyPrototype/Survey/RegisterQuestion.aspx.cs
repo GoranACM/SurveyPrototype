@@ -80,6 +80,11 @@ namespace SurveyPrototype.Survey
             Response.Redirect("~/Survey/Register.aspx");
         }
 
+        protected void closeBtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Survey/SurveyEnd.aspx");
+        }
+
         //private void SaveAnonimous()
         //{
         //    try

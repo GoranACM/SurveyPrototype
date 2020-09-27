@@ -35,6 +35,18 @@
         <div>
             <h3>Feel free to close the tab...</h3>
         </div>
+        <div>
+            <asp:Table ID="UserAnswerTable" runat="server">
+                <asp:TableHeaderRow>
+                    <asp:TableCell Font-Bold="true"></asp:TableCell>
+                    <asp:TableCell Font-Bold="true">Answers</asp:TableCell>
+                </asp:TableHeaderRow>
+                <asp:TableRow>
+                    <asp:TableCell Font-Bold="true" ForeColor="#5dbcd2">__________________________________________</asp:TableCell>
+                    <asp:TableCell Font-Bold="true" ForeColor="#5dbcd2">________________________</asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+        </div>
     </form>
 </body>
 </html>
