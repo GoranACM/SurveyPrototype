@@ -31,216 +31,76 @@ namespace SurveyPrototype.SurveyPages
 
         protected void searchBtn_Click(object sender, EventArgs e)
         {
-            if (SearchBox.Text.Equals(""))
+            try
             {
-                WarningLabel.Visible = true;
-                WarningLabel.Text = "Please insert search phrase";
+                if (SearchBox.Text.Equals(""))
+                {
+                    WarningLabel.Visible = true;
+                    WarningLabel.Text = "Please insert search phrase";
+                }
+                else
+                {
+                    if (RadioButtonList1.SelectedValue == "ID")
+                    {
+                        int parsedValue;
+
+                        if (int.TryParse(SearchBox.Text, out parsedValue))
+                        {
+                            SearchByID();
+                            WarningLabel.Visible = false;
+                        }
+                        else
+                        {
+                            WarningLabel.Text = "Please insert a valid ID";
+                            WarningLabel.Visible = true;
+                        }
+
+                    }
+                    else if (RadioButtonList1.SelectedValue == "First Name")
+                    {
+                        if (SurveyUtil.IsNameOrLastName(SearchBox.Text))
+                        {
+                            SearchByFirst();
+                            WarningLabel.Visible = false;
+                        }
+                        else
+                        {
+                            WarningLabel.Visible = true;
+                            WarningLabel.Text = "Please insert valid Name";
+                        }
+                    }
+                    else if (RadioButtonList1.SelectedValue == "Last Name")
+                    {
+                        if (SurveyUtil.IsNameOrLastName(SearchBox.Text))
+                        {
+                            SearchByLast();
+                            WarningLabel.Visible = false;
+                        }
+                        else
+                        {
+                            WarningLabel.Visible = true;
+                            WarningLabel.Text = "Please insert valid Last Name";
+                        }
+                    }
+                    else if (RadioButtonList1.SelectedValue == "Phone Number")
+                    {
+                        if (SurveyUtil.IsPhoneNumber(SearchBox.Text))
+                        {
+                            SearchByPhone();
+                            WarningLabel.Visible = false;
+                        }
+                        else
+                        {
+                            WarningLabel.Visible = true;
+                            WarningLabel.Text = "Please insert valid Phone Number";
+                        }
+                    }
+                }
             }
-            else
+            catch (Exception)
             {
-                if (RadioButtonList1.SelectedValue == "ID")
-                {
-                    int parsedValue;
-
-                    if (int.TryParse(SearchBox.Text, out parsedValue))
-                    {
-                        SearchByID();
-                        WarningLabel.Visible = false;
-                    }
-                    else
-                    {
-                        WarningLabel.Text = "Please insert a valid ID";
-                        WarningLabel.Visible = true;
-                    }
-                    
-                }
-                else if (RadioButtonList1.SelectedValue == "First Name")
-                {
-                    if (SurveyUtil.IsNameOrLastName(SearchBox.Text))
-                    {
-                        SearchByFirst();
-                        WarningLabel.Visible = false;
-                    }
-                    else
-                    {
-                        WarningLabel.Visible = true;
-                        WarningLabel.Text = "Please insert valid Name";
-                    }                   
-                }
-                else if (RadioButtonList1.SelectedValue == "Last Name")
-                {
-                    if (SurveyUtil.IsNameOrLastName(SearchBox.Text))
-                    {
-                        SearchByLast();
-                        WarningLabel.Visible = false;
-                    }
-                    else
-                    {
-                        WarningLabel.Visible = true;
-                        WarningLabel.Text = "Please insert valid Last Name";
-                    }                   
-                }
-                else if (RadioButtonList1.SelectedValue == "Phone Number")
-                {
-                    if (SurveyUtil.IsPhoneNumber(SearchBox.Text))
-                    {
-                        SearchByPhone();
-                        WarningLabel.Visible = false;
-                    }
-                    else
-                    {
-                        WarningLabel.Visible = true;
-                        WarningLabel.Text = "Please insert valid Phone Number";
-                    }                  
-                }
-            }
-
-            //if (true)
-            {
-                //if (IsPostBack)
-                //{
-                //string searchValue = SearchBox.Text;
-
-                //if (SearchRadioButtonList.SelectedValue.Equals(1))
-                //{
-                //    int parsedValue;
-
-                //    if (SearchBox.Text.Equals(""))
-                //    {
-                //        WarningValidator.Text = "Please insert ID";
-                //        WarningValidator.Visible = true;
-                //    }
-                //    else if (!int.TryParse(SearchBox.Text, out parsedValue))
-                //    {
-                //        WarningValidator.Text = "Please insert a valid ID";
-                //        WarningValidator.Visible = true;
-                //    }
-                //    else
-                //    {
-                //        try
-                //        {
-                //            foreach (GridViewRow row in GridView1.Rows)
-                //            {
-                //                if (row.Cells[0].Text.ToString().Equals(searchValue))
-                //                {
-                //                    row.Visible = true;
-                //                }
-                //                else
-                //                {
-                //                    row.Visible = false;
-                //                }
-                //            }
-                //        }
-                //        catch (Exception)
-                //        {
-                //            throw;
-                //        }
-                //    }
-                //}
-                //else if (SearchRadioButtonList.SelectedValue.Equals(2))
-                //{
-                //    if (SearchBox.Text.Equals(""))
-                //    {
-                //        WarningValidator.Text = "Please insert a First Name";
-                //        WarningValidator.Visible = true;
-                //    }
-                //    else if (!SurveyUtil.IsNameOrLastName(SearchBox.Text))
-                //    {
-                //        WarningValidator.Text = "Please insert a valid First Name";
-                //        WarningValidator.Visible = true;
-                //    }
-                //    else
-                //    {
-                //        try
-                //        {
-                //            foreach (GridViewRow row in GridView1.Rows)
-                //            {
-                //                if (row.Cells[1].Text.ToString().Equals(searchValue))
-                //                {
-                //                    row.Visible = true;
-                //                }
-                //                else
-                //                {
-                //                    row.Visible = false;
-                //                }
-                //            }
-                //        }
-                //        catch (Exception)
-                //        {
-                //            throw;
-                //        }
-                //    }
-                //}
-                //else if (SearchRadioButtonList.SelectedValue.Equals(3))
-                //{
-                //    if (SearchBox.Text.Equals(""))
-                //    {
-                //        WarningValidator.Text = "Please insert a Last Name";
-                //        WarningValidator.Visible = true;
-                //    }
-                //    else if (!SurveyUtil.IsNameOrLastName(SearchBox.Text))
-                //    {
-                //        WarningValidator.Text = "Please insert a valid Last Name";
-                //        WarningValidator.Visible = true;
-                //    }
-                //    else
-                //    {
-                //        try
-                //        {
-                //            foreach (GridViewRow row in GridView1.Rows)
-                //            {
-                //                if (row.Cells[2].Text.ToString().Equals(searchValue))
-                //                {
-                //                    row.Visible = true;
-                //                }
-                //                else
-                //                {
-                //                    row.Visible = false;
-                //                }
-                //            }
-                //        }
-                //        catch (Exception)
-                //        {
-                //            throw;
-                //        }
-                //    }
-                //}
-                //else if (SearchRadioButtonList.SelectedValue.Equals(4))
-                //{
-
-                //    if (SearchBox.Text.Equals(""))
-                //    {
-                //        WarningValidator.Text = "Please insert a phone number";
-                //        WarningValidator.Visible = true;
-                //    }
-                //    else if (!SurveyUtil.IsPhoneNumber(SearchBox.Text))
-                //    {
-                //        WarningValidator.Text = "Please insert a valid phone number";
-                //        WarningValidator.Visible = true;
-                //    }
-                //    else
-                //    {
-                //        try
-                //        {
-                //            foreach (GridViewRow row in GridView1.Rows)
-                //            {
-                //                if (row.Cells[4].Text.ToString().Equals(searchValue))
-                //                {
-                //                    row.Visible = true;
-                //                }
-                //                else
-                //                {
-                //                    row.Visible = false;
-                //                }
-                //            }
-                //        }
-                //        catch (Exception)
-                //        {
-                //            throw;
-                //        }
-                //    }
-                //}
-                //}
+                Response.Redirect("~/ErrorPages/ErrorPage.aspx");
+                throw;
             }
 
         }
