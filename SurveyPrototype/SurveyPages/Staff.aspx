@@ -29,113 +29,42 @@
     <form id="form1" runat="server" class="grid">
         <div class="containerForm">
            <div><asp:Button ID="logOut" runat="server" Text="Logout" OnClick="logOut_Click" CssClass="button" /></div>
-           <asp:Label ID="Label2" runat="server" Text="Select filters" Font-Size="25px"></asp:Label>
-            <div class="filters">
-                <asp:Label ID="Label1" runat="server" Text="General" Font-Size="15px" CssClass="labels"></asp:Label>
-                <div class="filterItem">               
-                    <asp:DropDownList ID="GenderDownList" runat="server" Height="25px" Width="150px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px">
-                        <asp:ListItem selected="True">Filter by gender...</asp:ListItem>
-                        <asp:ListItem Value="M">Male</asp:ListItem>
-                        <asp:ListItem Value="F">Female</asp:ListItem>                    
-                    </asp:DropDownList>
-                </div>
+           <br />
 
-                <div class="filterItem">               
-                    <asp:DropDownList ID="AgeDownList" runat="server" Height="25px" Width="150px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px">
-                        <asp:ListItem selected="True">Filter by gender...</asp:ListItem>
-                        <asp:ListItem Value="1">18 - 25</asp:ListItem>
-                        <asp:ListItem Value="2">26 - 30</asp:ListItem>
-                        <asp:ListItem Value="3">31 - 40</asp:ListItem>
-                        <asp:ListItem Value="4">41 - 55</asp:ListItem>
-                        <asp:ListItem Value="5">56 - 70</asp:ListItem>
-                        <asp:ListItem Value="6">70+</asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-
-                <div class="filterItem">                
-                    <asp:DropDownList ID="StateDropDown" runat="server" Height="25px" Width="150px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px">
-                        <asp:ListItem selected="True">Filter by state...</asp:ListItem>
-                        <asp:ListItem Value="NSW">New South Wales</asp:ListItem>
-                        <asp:ListItem Value="VIC">Victoria</asp:ListItem>
-                        <asp:ListItem Value="SA">South Australia</asp:ListItem>
-                        <asp:ListItem Value="QLD">Queensland</asp:ListItem>
-                        <asp:ListItem Value="TAS">Tasmania</asp:ListItem>
-                        <asp:ListItem Value="WA">Western Australia</asp:ListItem>
-                        <asp:ListItem Value="NT">Northern Teritory</asp:ListItem>                    
-                    </asp:DropDownList>
-                </div>
+            <br />
+            <div class="grid">
+                <asp:Label ID="Answer" runat="server" Text="Search respondent by:" Font-Size="25px" CssClass="labels"></asp:Label>
             </div>
+            <br />
+                <div class="filters">
+                    
+                    <div class="filterItem">               
+                        <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal" CssClass="radio-toolbar">
+                            <asp:ListItem>ID</asp:ListItem>
+                            <asp:ListItem>First Name</asp:ListItem>
+                            <asp:ListItem>Last Name</asp:ListItem>
+                            <asp:ListItem>Phone Number</asp:ListItem>
+                        </asp:RadioButtonList>
+                    </div>
+                    <br />
+                    <div class="filterItem">
+                     
+                    </div>
 
-            <div class="filters">
-                <asp:Label ID="Label3" runat="server" Text="Bank" Font-Size="15px" CssClass="labels"></asp:Label>
-                <div class="filterItem">               
-                    <asp:DropDownList ID="DropDownList1" runat="server" Height="25px" Width="150px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px">
-                        <asp:ListItem selected="True">Filter by bank...</asp:ListItem>
-                        <asp:ListItem Value="CB">Commbank</asp:ListItem>
-                        <asp:ListItem Value="ANZ">ANZ</asp:ListItem>
-                        <asp:ListItem Value="WP">Westpac</asp:ListItem> 
-                        <asp:ListItem Value="NAB">NAB</asp:ListItem> 
-                    </asp:DropDownList>
-                </div>
-
-                <div class="filterItem">               
-                    <asp:DropDownList ID="DropDownList2" runat="server" Height="25px" Width="150px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px">
-                        <asp:ListItem selected="True">Filter by bank service...</asp:ListItem>
-                        <asp:ListItem Value="1">Internet Banking</asp:ListItem>
-                        <asp:ListItem Value="2">Home Loan</asp:ListItem>
-                        <asp:ListItem Value="3">Credit card</asp:ListItem>
-                        <asp:ListItem Value="4">Share Investment</asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-                <div class="filterItem">               
-
-                </div>
-
-
-            </div>
-        
-            <div class="filters">
-                <asp:Label ID="Label4" runat="server" Text="Newspaper" Font-Size="15px" CssClass="labels"></asp:Label>
-                <div class="filterItem">               
-                    <asp:DropDownList ID="DropDownList3" runat="server" Height="25px" Width="150px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px">
-                        <asp:ListItem selected="True">Filter by newspaper...</asp:ListItem>
-                        <asp:ListItem Value="M">The Daily Telegraph</asp:ListItem>
-                        <asp:ListItem Value="F">Sports Illustrated</asp:ListItem>
-                        <asp:ListItem Value="F">None</asp:ListItem>
-                    </asp:DropDownList>
                 </div>
             
-                <div class="filterItem">               
-                    <asp:DropDownList ID="DropDownList4" runat="server" Height="25px" Width="150px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px">
-                        <asp:ListItem selected="True">Filter by news section...</asp:ListItem>
-                        <asp:ListItem Value="1">Property</asp:ListItem>
-                        <asp:ListItem Value="2">Sport</asp:ListItem>
-                        <asp:ListItem Value="3">Financial</asp:ListItem>
-                        <asp:ListItem Value="4">Entertainment</asp:ListItem>
-                        <asp:ListItem Value="5">Lifestyle</asp:ListItem>
-                        <asp:ListItem Value="6">Travel</asp:ListItem>
-                        <asp:ListItem Value="7">Politics</asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-
-                <div class="filterItem">                
-
-                </div>
-            </div>
-
-            <div class="grid">
-                <asp:Label ID="Answer" runat="server" Text="Search respondent:" Font-Size="25px" CssClass="labels"></asp:Label>
-            </div>
             <div class="filters">            
                 <div class="filterItem">
-                    <asp:TextBox ID="AnswerBox" runat="server" Placeholder="Search here..." Height="30px" Width="270px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px"></asp:TextBox>                
+                    <asp:TextBox ID="SearchBox" runat="server" Placeholder="Search here..." Height="30px" Width="270px" Font-Names="Roboto" BorderColor="#5dbcd2" BorderWidth="2px"></asp:TextBox> 
+                    <br />
+                    <asp:Label ID="WarningLabel" runat="server" Text="Label" ForeColor="Red"></asp:Label>
                 </div>
-            
+            <br />
                <div class="filterItem">
-                    <asp:Button ID="searchBtn" runat="server" Text="Search" style="background-color: #5dbcd2; color: white" CssClass="button"/>
+                    <asp:Button ID="searchBtn" runat="server" Text="Search" style="background-color: #5dbcd2; color: white; margin-left: 90px;" CssClass="button" OnClick="searchBtn_Click"/>
                 </div>         
             </div>
-
+            <br />
             <div class="container">
                 <div class="grid">
                     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellPadding="3" CellSpacing="1" DataKeyNames="sRespondentID" DataSourceID="SqlDataSource3" GridLines="None" AllowPaging="True" PageSize="10">

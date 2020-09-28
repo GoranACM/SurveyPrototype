@@ -41,14 +41,12 @@ namespace SurveyPrototype.SurveyPages
         {
             if (SStaffDAO.ValidateUser(UserNameBox.Text, PasswordBox.Text))
             {
-                FormsAuthentication.RedirectFromLoginPage(UserNameBox.Text, false);
-                
+                FormsAuthentication.RedirectFromLoginPage(UserNameBox.Text, false);                
             }
             else
             {
                 invalidLoginLabel.Visible = true;
             }
-            //Response.Redirect("~/Survey/Staff.aspx", true);
         }
     }
 }

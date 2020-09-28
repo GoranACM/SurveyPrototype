@@ -10,8 +10,8 @@
 
 using SurveyPrototype.SurveyDBUtilities;
 using SurveyPrototype.SurveyEntities;
+using SurveyPrototype.SurveyUtilities;
 using System;
-using System.Text.RegularExpressions;
 using System.Web.UI;
 
 namespace SurveyPrototype.Survey
@@ -37,7 +37,7 @@ namespace SurveyPrototype.Survey
         protected void registerSurveyBtn_Click(object sender, EventArgs e)
         {
             // Check the 3 fields for wrong input
-            if (IsPhoneNumber(PhoneNumberBox.Text) && IsNameOrLastName(FirstNameBox.Text) && IsNameOrLastName(LastNameBox.Text))
+            if (SurveyUtil.IsPhoneNumber(PhoneNumberBox.Text) && SurveyUtil.IsNameOrLastName(FirstNameBox.Text) && SurveyUtil.IsNameOrLastName(LastNameBox.Text))
             {
                 try
                 {
@@ -68,17 +68,17 @@ namespace SurveyPrototype.Survey
             }
             else
             {
-                if (!IsNameOrLastName(FirstNameBox.Text))
+                if (!SurveyUtil.IsNameOrLastName(FirstNameBox.Text))
                 {
                     wrongFirstNameLabel.Text = "Please insert a valid First name";
                     wrongFirstNameLabel.Visible = true;
                 }
-                else if (!IsNameOrLastName(LastNameBox.Text))
+                else if (!SurveyUtil.IsNameOrLastName(LastNameBox.Text))
                 {
                     wrongLastNameLabel.Text = "Please insert a valid Last name";
                     wrongLastNameLabel.Visible = true;
                 }
-                else if (!IsPhoneNumber(PhoneNumberBox.Text))
+                else if (!SurveyUtil.IsPhoneNumber(PhoneNumberBox.Text))
                 {
                     wrongNumberLabel.Text = "Please insert a valid number";
                     wrongNumberLabel.Visible = true;
@@ -111,26 +111,6 @@ namespace SurveyPrototype.Survey
         {
             DOBBox.Text = DOBCalendar.SelectedDate.ToShortDateString();
             DOBCalendar.Visible = false;
-        }
-
-        /// <summary>
-        /// Validation for First and Last name
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns>Boolean</returns>
-        public static bool IsNameOrLastName(string name)
-        {
-            return Regex.Match(name, @"^[\p{L} \.\-]+$").Success;
-        }
-
-        /// <summary>
-        /// Validation for Australian numbers only
-        /// </summary>
-        /// <param name="phoneNumber"></param>
-        /// <returns>Boolean</returns>
-        public static bool IsPhoneNumber(string phoneNumber)
-        {
-            return Regex.Match(phoneNumber, @"^([\+]?61[-]?|[0])?[1-9][0-9]{8}$").Success;
         }
         
     }

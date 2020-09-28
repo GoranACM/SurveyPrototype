@@ -8,6 +8,7 @@
  *  Subject: Data-Driven Apps
  */
 
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace SurveyPrototype.SurveyUtilities
@@ -71,6 +72,26 @@ namespace SurveyPrototype.SurveyUtilities
                 }
             }
             return ipAddress;
+        }
+
+        /// <summary>
+        /// Validation for First and Last name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>Boolean</returns>
+        public static bool IsNameOrLastName(string name)
+        {
+            return Regex.Match(name, @"^[\p{L} \.\-]+$").Success;
+        }
+
+        /// <summary>
+        /// Validation for Australian numbers only
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns>Boolean</returns>
+        public static bool IsPhoneNumber(string phoneNumber)
+        {
+            return Regex.Match(phoneNumber, @"^([\+]?61[-]?|[0])?[1-9][0-9]{8}$").Success;
         }
 
     }

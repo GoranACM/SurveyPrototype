@@ -73,7 +73,7 @@ namespace SurveyPrototype.SurveyPages
             }
             catch (Exception)
             {
-                //Response.Redirect("~/ErrorPages/ErrorPage.aspx");
+                Response.Redirect("~/ErrorPages/ErrorPage.aspx");
                 throw;
             }
 
